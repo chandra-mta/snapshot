@@ -4,136 +4,105 @@ sub write_txt {
   my %h = @_;
 
 # construct the snapshot page
-my $s = sprintf "UTC %s f_ACE %.2e F_CRM %.2e Kp %.1f R km%7s%s\n",${$h{UTC}}[1],${$h{FLUXACE}}[1],${$h{CRM}}[1],${$h{KP}}[1],${$h{EPHEM_ALT}}[1],${$h{EPHEM_LEG}}[1];
+my $s = sprintf "UTC %s   f_ACE %.2e F_CRM %.2e Kp %.1f R km%7s%s\n",${$h{UTC}}[1],${$h{FLUXACE}}[1],${$h{CRM}}[1],${$h{KP}}[1],${$h{EPHEM_ALT}}[1],${$h{EPHEM_LEG}}[1];
 
-$s .= sprintf "OBT %s  CTUVCDU %8d  OBC s/w %s  %s_%-4s   CPEstat %s\n",
+$s .= sprintf "OBT %s  CTUVCDU %8d  OBC s/w %s  %s_%-4s   CPEstat   %s\n",
     ${$h{OBT}}[1],${$h{CCSDSVCD}}[1],${$h{CONLOFP}}[1],${$h{CCSDSTMF}}[1],${$h{COTLRDSF}}[1],${$h{AOCPESTL}}[1];
 
 $s .= sprintf "OBT %17.2f  ONLVCDU %8d  OBC Errs%4d\n",${$h{OBT}}[0],${$h{OFLVCDCT}}[1],${$h{COERRCN}}[1];
 
-$s .= sprintf "                                                     OBSID  %5d  EPState %4s\n",
+$s .= sprintf "                                                     OBSID  %5d  EPState   %4s\n",
     ${$h{COBSRQID}}[1], ${$h{EPSTATE}}[1];
 
-$s .= sprintf "SIM TTpos %7d  HETG Angle%6.2f  PCADMODE %s   RA   %7.3f  Bus V %6.2f\n",
+$s .= sprintf "SIM TTpos %7d  HETG Angle%6.2f  PCADMODE %s   RA   %7.3f  Bus V   %6.2f\n",
     ${$h{"3TSCPOS"}}[1],${$h{"4HPOSARO"}}[1],${$h{AOPCADMD}}[1],${$h{RA}}[1],${$h{ELBV}}[1];
 
-$s .= sprintf "SIM FApos %7d  LETG Angle%6.2f  PCONTROL %s   Dec  %7.3f  Bus I %6.2f\n",
+$s .= sprintf "SIM FApos %7d  LETG Angle%6.2f  PCONTROL %s   Dec  %7.3f  Bus I   %6.2f\n",
     ${$h{"3FAPOS"}}[1],${$h{"4LPOSBRO"}}[1],${$h{AOCONLAW}}[1],${$h{DEC}}[1],${$h{ELBI_LOW}}[1];
 
-$s .= sprintf "                                     AOFSTAR  %s   Roll %7.3f\n",
-    ${$h{AOFSTAR}}[1],${$h{ROLL}}[1];
+$s .= sprintf "                                     AOFSTAR  %s   Roll %7.3f  PRBus I %6.2f\n",
+    ${$h{AOFSTAR}}[1],${$h{ROLL}}[1], ${$h{"2PRBSCR"}}[1];
 
-$s .= sprintf "ACA Object %s    Dither  %s                                HRC-I HV %3s\n",
-    ${h{ACAOBJ}}[1],${$h{AODITHEN}}[1],${$h{"2IMONST"}}[1];
+$s .= sprintf "ACA Object %s    Dither  %s                                \n",
+    ${h{ACAOBJ}}[1],${$h{AODITHEN}}[1];
 
-$s .= sprintf "ACA ImFunc %s    Dith Yang %6.2f    Yaw Rate   %7.2f      HRC-S HV %3s\n",
-    ${$h{ACAFCT}}[1],${$h{AODITHR3}}[1],${$h{AORATE3}}[1],${$h{"2SPONST"}}[1];
+$s .= sprintf "ACA ImFunc %s    Dith Yang %6.2f    Yaw Rate   %7.2f      HRC-I HV   %3s\n",
+    ${$h{ACAFCT}}[1],${$h{AODITHR3}}[1],${$h{AORATE3}}[1], ${$h{"2IMONST"}}[1];
 
-$s .= sprintf "ACA CCD Temp %6.1f    Dith Zang %6.2f    Pitch Rate %7.2f      SHLD HV %4d\n",
-${$h{AACCCDPT}}[1],${$h{AODITHR2}}[1],${$h{AORATE2}}[1],${$h{"2S2HVST"}}[1];
+$s .= sprintf "ACA CCD Temp %6.1f    Dith Zang %6.2f    Pitch Rate %7.2f      HRC-S HV   %3s\n",
+${$h{AACCCDPT}}[1],${$h{AODITHR2}}[1],${$h{AORATE2}}[1], ${$h{"2SPONST"}}[1];
 
-$s .= sprintf "ACA Int Time %6.3f                        Roll Rate  %7.2f      EVT RT  %4d\n",
-    ${$h{AOACINTT}}[1],${$h{AORATE1}}[1],${$h{"2DETBRT"}}[1];
+$s .= sprintf "ACA Int Time %6.3f                        Roll Rate  %7.2f      SHLD HV   %4d\n",
+    ${$h{AOACINTT}}[1],${$h{AORATE1}}[1], ${$h{"2S2HVST"}}[1];
 
-$s .= sprintf "AOACSTAT       %4s    FSS SunBeta %4s                            SHLD RT %4d\n",
-    ${$h{AOACSTAT}}[1],${$h{AOBETSUN}}[1],${$h{"2SHLDBRT"}}[1];
+$s .= sprintf "AOACSTAT       %4s    FSS SunBeta %4s %26s EVT RT    %4d\n",
+    ${$h{AOACSTAT}}[1],${$h{AOBETSUN}}[1], " ", ${$h{"2DETBRT"}}[1];
 
-$s .= sprintf "                       FSS Alfa  %6.2f    Batt 1 SOC %7.2f%%\n",
-    ${$h{AOALPANG}}[1],${$h{SOCB1}}[1];
+$s .= sprintf "                       FSS Alfa  %6.2f    Batt 1 SOC %7.2f%%     SHLD RT   %4d\n",
+    ${$h{AOALPANG}}[1],${$h{SOCB1}}[1], ${$h{"2SHLDBRT"}}[1];
 
-$s .= sprintf "Avg HRMA Temp%6.2f    FSS Beta  %6.2f    Batt 2 SOC %7.2f%%  ACIS Stat7-0 %s\n",
-    ${$h{"4OAVHRMT"}}[1],${$h{AOBETANG}}[1],${$h{SOCB2}}[1], ${$h{ACISTAT}}[1];
+$s .= sprintf "Avg HRMA Temp%6.2f    FSS Beta  %6.2f    Batt 2 SOC %7.2f%%\n",
+    ${$h{"4OAVHRMT"}}[1],${$h{AOBETANG}}[1],${$h{SOCB2}}[1];
 
-$s .= sprintf "Avg OBA Temp %6.2f    SA Resolv %6.2f    Batt 3 SOC %7.2f%%  Cold Rad %6.1f\n",
-    ${$h{"4OAVOBAT"}}[1],${$h{AOSARES1}}[1], ${$h{SOCB3}}[1], ${$h{"1CRAT"}}[1];
+$s .= sprintf "Avg OBA Temp %6.2f    SA Resolv %6.2f    Batt 3 SOC %7.2f%%     -15 V     %4d\n",
+    ${$h{"4OAVOBAT"}}[1],${$h{AOSARES1}}[1], ${$h{SOCB3}}[1], ${$h{"2N15VBVL"}}[1];
 
-$s .= sprintf "OBA Tavg Fault %s    SA Sun Pres %4s                         Warm Rad %6.1f\n",
-    ${$h{"4OBAVTMF"}}[1], ${$h{AOSAILLM}}[1], ${$h{"1WRAT"}}[1];
+$s .= sprintf "OBA Tavg Fault %s    SA Sun Pres %4s %26s +15 V     %4d\n",
+    ${$h{"4OBAVTMF"}}[1], ${$h{AOSAILLM}}[1], " ", ${$h{"2P15VBVL"}}[1];
 
-$s .= sprintf "OBA Trng Fault %s                        +Y SA Amps %7.2f   RadMon     %4s\n",
-    ${$h{"4OBTOORF"}}[1], ${$h{ESAPYI}}[1], ${$h{CORADMEN}}[1];
+$s .= sprintf "OBA Trng Fault %s                        +Y SA Amps %7.2f      +24 V     %4d\n",
+    ${$h{"4OBTOORF"}}[1], ${$h{ESAPYI}}[1], , ${$h{"2P24VBVL"}}[1];
 
-$s .= sprintf "HRMA power  %7.2f    SCS 128  %4s       -Y SA Amps %7.2f\n",
-    ${$h{OHRMAPWR}}[1], ${$h{COSCS128S}}[1], ${$h{ESAMYI}}[1]; #removed EPHIN Geom 9/24
+$s .= sprintf "HRMA power  %7.2f    SCS 128  %4s       -Y SA Amps %7.2f      +5 V      %4d\n",
+    ${$h{OHRMAPWR}}[1], ${$h{COSCS128S}}[1], ${$h{ESAMYI}}[1], ${$h{"2P5VBVL"}}[1];
 
 $s .= sprintf "OBA power   %7.2f    SCS 129  %4s       +Y SA Temp %7.2f\n",
-    ${$h{OOBAPWR}}[1], ${$h{COSCS129S}}[1], ${$h{TSAPYT}}[1];#removed E150
+    ${$h{OOBAPWR}}[1], ${$h{COSCS129S}}[1], ${$h{TSAPYT}}[1];
 
-$s .= sprintf "                       SCS 130  %4s       -Y SA Temp %7.2f\n",
-    ${$h{COSCS130S}}[1], ${$h{TSAMYT}}[1];#removed E300
+$s .= sprintf "                       SCS 130  %4s       -Y SA Temp %7.2f    ACIS Stat7-0  %s\n",
+    ${$h{COSCS130S}}[1], ${$h{TSAMYT}}[1], ${$h{ACISTAT}}[1];
 
-#$s .= sprintf "Roll Mom.  %8.3f                                             E1300%10.1f\n",
-    #${$h{AOSYMOM1}}[1], $eph{E1300};
-$s .= sprintf "Roll Mom.  %8.3f    SCS 131  %4s\n",
-    ${$h{AOSYMOM1}}[1], ${$h{COSCS131S}}[1]; #removed E1300
+$s .= sprintf "Roll Mom.  %8.3f    SCS 131  %4s %27s Cold Rad  %6.1f\n",
+    ${$h{AOSYMOM1}}[1], ${$h{COSCS131S}}[1], " ", ${$h{"1CRAT"}}[1];
 
-$s .= sprintf "Pitch Mom. %8.3f    SCS 132  %4s       Ephin temp %7.2f   UpLCmdAcc%6d\n",
-    ${$h{AOSYMOM2}}[1], ${$h{COSCS132S}}[1], ${$h{"5EPHINT"}}[1], ${$h{CULACC}}[1]; #removed EPH A-Leak
+$s .= sprintf "Pitch Mom. %8.3f    SCS 132  %4s       Ephin temp %7.2f    Warm Rad  %6.1f\n",
+    ${$h{AOSYMOM2}}[1], ${$h{COSCS132S}}[1], ${$h{"5EPHINT"}}[1], ${$h{"1WRAT"}}[1];
 
-$s .= sprintf "Yaw Mom.   %8.3f    SCS 133  %4s       EIO temp %9.2f   Cmd Rej A%6d\n",
-    ${$h{AOSYMOM3}}[1], ${$h{COSCS133S}}[1], ${$h{"5EIOT"}}[1], ${$h{CMRJCNTA}}[1];
+$s .= sprintf "Yaw Mom.   %8.3f    SCS 133  %4s       EIO temp %9.2f    RadMon      %4s\n",
+    ${$h{AOSYMOM3}}[1], ${$h{COSCS133S}}[1], ${$h{"5EIOT"}}[1],  ${$h{CORADMEN}}[1];
 
-$s .= sprintf "PMTANKP    %8.3f    SCS 107  %4s       EPH temp %9.2f\n", ${$h{PMTANKP}}[1],${$h{COSCS107S}}[1],${$h{TEPHIN}}[1];
+$s .= sprintf "PMTANKP    %8.3f    SCS 107  %4s       EPH temp %9.2f\n",
+    ${$h{PMTANKP}}[1],${$h{COSCS107S}}[1],${$h{TEPHIN}}[1];
 
-#$s .= sprintf "Gyro 2 Curr 1 %6.2f                  ", ${$h{AIRU2G1I}}[1];
-##$s .= sprintf "\nGyro 1 Curr 1 %6.2f  Roll Bias   %7.4f  EPH 27I %9.2f", ${$h{AIRU1G1I}}[1], ${$h{AOGBIAS1}}[1]*206264.98, ${$h{"5HSE202"}}[1];
-#$s .= sprintf "%25s M Unload %6s\n", " ",${$h{AOUNLOAD}}[1];
-#$s .= sprintf "Gyro 2 Curr 2 %6.2f  Roll Bias  %7.4f", ${$h{AIRU2G2I}}[1], ${$h{AOGBIAS1}}[1]*206264.98;
-#if (${$h{CTXAPWR}}[1] > 15) {
-  #$s .= sprintf "   CTX A PWR   %6.2f", ${$h{CTXAPWR}}[1];
-#} else {
-  #$s .= sprintf "   CTX B PWR   %6.2f", ${$h{CTXBPWR}}[1];
-#}
-#$s .= sprintf "   TSC Move %6s\n", ${$h{"3TSCMOVE"}}[1];
-#$s .= sprintf "Prop. line 03 %6.2f  Pitch Bias %7.4f", ${$h{PLINE03T}}[1], ${$h{AOGBIAS2}}[1]*206264.98;
-#if (${$h{CTXAV}}[1] > 1) {
-  #$s .= sprintf "   CTX A Volts %6.2f", ${$h{CTXAV}}[1];
-#} else {
-  #$s .= sprintf "   CTX B Volts %6.2f", ${$h{CTXBV}}[1];
-#}
-#$s .= sprintf "   FA Move  %6s\n", ${$h{"3FAMOVE"}}[1];
-#$s .= sprintf "Prop. line 04 %6.2f  Yaw Bias   %7.4f", ${$h{PLINE04T}}[1], ${$h{AOGBIAS3}}[1]*206264.98;
-#$s .= sprintf "%23s OTG Move %6s\n", " ",${$h{"4OOTGMEF"}}[1];
+$s .= sprintf "%64s UpLCmdAcc %6d\n",
+               " ", ${$h{CULACC}}[1];
 
-$s .= sprintf "IRU2G1 curr %8.2f                                         ",
-               ${$h{AIRU2G1I}}[1];
-#if ((${$h{"5EHSE106"}}[1]) % 2 == 1) {
-#  $s .= sprintf "%18s  EPH 27V  %9.2f",
-#                 " ", ${$h{"5HSE202"}}[1];
-#} else {
-#  $s .= sprintf "%18s  EPH 27I  %9.2f",
-#                 " ",${$h{"5HSE202"}}[1]*20.1/31.05;
-#} # if ((${$h{"5EHSE106"}}[3]+1) % 2 == 0) {
-$s .= sprintf "%3sM Unload %6s\n",
-               " ", ${$h{AOUNLOAD}}[1];
-$s .= sprintf "IRU2G2 curr %8.2f   ",
-               ${$h{AIRU2G2I}}[1];
-$s .= sprintf "Roll Bias  %7.4f",
-               ${$h{AOGBIAS1}}[1]*206264.98;
-$s .= sprintf "%23sTSC Move %6s\n",
-               " ", ${$h{"3TSCMOVE"}}[1];
-$s .= sprintf "Prop. line 03 %6.2f   ",
-               ${$h{PLINE03T}}[1];
-$s .= sprintf "Pitch Bias %7.4f",
-               ${$h{AOGBIAS2}}[1]*206264.98;
+$s .= sprintf "IRU2G1 curr %8.2f %21s M Unload  %6s      Cmd Rej A %6d\n",
+               ${$h{AIRU2G1I}}[1], " ", ${$h{AOUNLOAD}}[1], ${$h{CMRJCNTA}}[1];
+
+$s .= sprintf "IRU2G2 curr %8.2f   Roll Bias  %7.4f  TSC Move  %6s\n",
+               ${$h{AIRU2G2I}}[1], ${$h{AOGBIAS1}}[1]*206264.98, ${$h{"3TSCMOVE"}}[1];
+
+$s .= sprintf "Prop. line 03 %6.2f   Pitch Bias %7.4f  FA Move   %6s",
+               ${$h{PLINE03T}}[1], ${$h{AOGBIAS2}}[1]*206264.98, ${$h{"3FAMOVE"}}[1];
+               
 if (${$h{CTXAPWR}}[1] > 15) {
-  $s .= sprintf "  CTX A PWR  %7.2f", ${$h{CTXAPWR}}[1];
+  $s .= sprintf "    CTX A PWR  %7.2f\n", ${$h{CTXAPWR}}[1];
 } else {
-  $s .= sprintf "  CTX B PWR  %7.2f", ${$h{CTXBPWR}}[1];
+  $s .= sprintf "    CTX B PWR  %7.2f\n", ${$h{CTXBPWR}}[1];
 }
-$s .= sprintf "   FA Move  %6s\n",
-               ${$h{"3FAMOVE"}}[1];
-$s .= sprintf "Prop. line 04 %6.2f",
-               ${$h{PLINE04T}}[1];
-$s .= sprintf "%3sYaw Bias   %7.4f",
-               " ", ${$h{AOGBIAS3}}[1]*206264.98;
+
+$s .= sprintf "Prop. line 04 %6.2f   Yaw Bias   %7.4f  OTG Move  %6s",
+               ${$h{PLINE04T}}[1], ${$h{AOGBIAS3}}[1]*206264.98, ${$h{"4OOTGMEF"}}[1];
+#$s .= sprintf "%3sYaw Bias   %7.4f",
+#               " ", ${$h{AOGBIAS3}}[1]*206264.98;
 if (${$h{CTXAV}}[1] > 1) {
-  $s .= sprintf "  CTX A Volts  %5.2f", ${$h{CTXAV}}[1];
+  $s .= sprintf "    CTX A Volts  %5.2f\n", ${$h{CTXAV}}[1];
 } else {
-  $s .= sprintf "  CTX B Volts  %5.2f", ${$h{CTXBV}}[1];
+  $s .= sprintf "    CTX B Volts  %5.2f\n", ${$h{CTXBV}}[1];
 }
-$s .= sprintf "%3sOTG Move %6s\n",
-               " ",${$h{"4OOTGMEF"}}[1];
+#$s .= sprintf "%3sOTG Move %6s\n",
+#               " ",${$h{"4OOTGMEF"}}[1];
 
 return $s;
 
