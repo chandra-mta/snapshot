@@ -54,7 +54,7 @@ $s .= sprintf "OBA Trng Fault %s                        +Y SA Amps %7.2f      +2
     ${$h{"4OBTOORF"}}[1], ${$h{ESAPYI}}[1], , ${$h{"2P24VBVL"}}[1];
 
 $s .= sprintf "HRMA power  %7.2f    SCS 128  %4s       -Y SA Amps %7.2f      +5 V      %4d\n",
-    ${$h{OHRMAPWR}}[1], ${$h{COSCS128S}}[1], ${$h{ESAMYI}}[1], ${$h{"2P5VBVL"}}[1];
+    ${$h{OHRMAPWR}}[1], ${$h{COSCS128S}}[1], ${$h{ESAMYI}}[1], ${$h{"2P05VBVL"}}[1];
 
 $s .= sprintf "OBA power   %7.2f    SCS 129  %4s       +Y SA Temp %7.2f\n",
     ${$h{OOBAPWR}}[1], ${$h{COSCS129S}}[1], ${$h{TSAPYT}}[1];
