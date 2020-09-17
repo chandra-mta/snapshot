@@ -380,7 +380,8 @@ my %h;
 $utc = `date -u +"%Y:%j:%T (%b%e)"`;
 chomp $utc;
 $h{UTC} = [time_now(), $utc, "", "white"];
-my $s = sprintf "UTC %s f_ACE %.2e F_CRM %.2e Kp %.1f R km%7s%s\n",${$h{UTC}}[1],${$h{FLUXACE}}[1],${$h{CRM}}[1],${$h{KP}}[1],${$h{EPHEM_ALT}}[1],${$h{EPHEM_LEG}}[1];
+my $s = sprintf "UTC %s f_ACE %.2e F_CRM %.2e Kp %.1f R km%7s%s\n",
+                ${$h{UTC}}[1], ${$h{FLUXACE}}[1], ${$h{CRM}}[1], ${$h{KP}}[1], ${$h{EPHEM_ALT}}[1], ${$h{EPHEM_LEG}}[1];
 
 $snapf = "$_[0]";
 open(SF, "<$snapf") or die "Cannot open $snapf\n";
@@ -407,10 +408,9 @@ $s .= "<card id=\"current\">\n";
 $s .= "<p>\n";
 $s .= sprintf "UTC %s<br/>\n", ${$h{UTC}}[1];
 $s .= sprintf "f_ACE %.2e<br/>\n", ${$h{FLUXACE}}[1];
-#sprintf "F_ACE %.2e<br/>\n", #              ${$h{FLUACE}}[1];
 $s .= sprintf "F_CRM %.2e<br/>\n", ${$h{CRM}}[1];
 $s .= sprintf "Kp %.1f<br/>\n", ${$h{KP}}[1];
-$s .= sprintf "R km%7s%s<br/>\n", ${$h{EPHEM_ALT}}[1],${$h{EPHEM_LEG}}[1];
+$s .= sprintf "R km%7s%s<br/>\n", ${$h{EPHEM_ALT}}[1], ${$h{EPHEM_LEG}}[1];
 $s .= "<a href=\"snap2.wml\">Index</a><br/>\n";
 $s .= "</p></card>\n";
 $s .= "</wml>\n";
@@ -433,16 +433,8 @@ printf S "Chandra Snapshot<br/>\n";
 printf S "<a href=\'snap_curr.wml\'>Current/Rad</a><br/>\n";
 printf S "<a href=\'sccdm.wml\'>CCDM/OBC</a><br/>\n";
 printf S "<a href=\'spcad.wml\'>PCAD/ACA</a><br/>\n";
-#printf S "<a href=\'seph.wml\'>EPHIN</a><br/>\n";
-#printf S "<a href=\'sscs.wml\'>SCS/SW</a><br/>\n";
-#printf S "<a href=\'saca.wml\'>ACA</a><br/>\n";
-#printf S "<a href=\'ssim.wml\'>SIM/OTG</a><br/>\n";
 printf S "<a href=\'ssim.wml\'>INST</a><br/>\n";
 printf S "<a href=\'seps.wml\'>EPS/THERM</a><br/>\n";
-#printf S "<a href=\'sacis.wml\'>ACIS</a><br/>\n";
-#printf S "<a href=\'shrc.wml\'>HRC</a><br/>\n";
-#printf S "<a href=\'sfss.wml\'>FSS/SA</a><br/>\n";
-#printf S "<a href=\'shrma.wml\'>HRMA/OBA</a><br/>\n";
 printf S "<br/>\n";
 printf S "<a href=\'sot.wml\'>SOT Home</a><br/>\n";
 printf S "</p>\n";
@@ -486,6 +478,7 @@ printf S "<p>\n";
 printf S "EPState %4s<br/>\n", ${$h{EPSTATE}}[1];
 printf S "Bus V %6.2f<br/>\n", ${$h{ELBV}}[1];
 printf S "Bus I %6.2f<br/>\n", ${$h{ELBI_LOW}}[1];
+printf S "PRBus I %6.2f<br/>\n", ${$h{"2PRBSCR"}}[1];
 printf S "Bat1SOC %7.2f%%<br/>\n", ${$h{SOCB1}}[1];
 printf S "Bat2SOC %7.2f%%<br/>\n", ${$h{SOCB2}}[1];
 printf S "Bat3SOC %7.2f%%<br/>\n", ${$h{SOCB3}}[1];
@@ -523,6 +516,10 @@ printf S "OBSMode %4s<br/>\n", ${$h{"2OBNLASL"}}[1];
 printf S "SHLD HV %4d<br/>\n", ${$h{"2S2HVST"}}[1];
 printf S "EVT RT  %4d<br/>\n", ${$h{"2DETBRT"}}[1];
 printf S "SHLD RT %4d<br/>\n", ${$h{"2SHLDBRT"}}[1];
+printf S "-15V %4d<br/>\n", ${$h{"2N15VBVL"}}[1];
+printf S "+15V %4d<br/>\n", ${$h{"2P15VBVL"}}[1];
+printf S "+5V %4d<br/>\n", ${$h{"2P05VBVL"}}[1];
+printf S "+24V %4d<br/>\n", ${$h{"2P24VBVL"}}[1];
 printf S "<a href=\'snap2.wml'>Index</a><br/>\n";
 printf S "<a href=\'snap_curr.wml'>Current</a><br/>\n";
 printf S "</p></card>\n";
@@ -584,17 +581,11 @@ printf S "<wml>\n";
 printf S "<card id=\'index\'>\n";
 printf S "<p>\n";
 printf S "RadMon     %4s<br/>\n", ${$h{CORADMEN}}[1];
-#printf S "EPHIN Geom %4s<br/>\n", ${$h{GEOM}}[1];
-#printf S "E150%11.1f<br/>\n", ${$h{E150}}[1];
-#printf S "E300%11.1f<br/>\n", ${$h{E300}}[1];
-#printf S "E1300%10.1f<br/>\n", ${$h{E1300}}[1];
 printf S "P4GM%11.1f<br/>\n", ${$h{P4GM}}[1];
 printf S "P41GM%10.1f<br/>\n", ${$h{P41GM}}[1];
 printf S "EPHINTemp%8.2f<br/>\n", ${$h{"5EPHINT"}}[1];
 printf S "EIO Temp%8.2f<br/>\n", ${$h{"5EOIT"}}[1];
 printf S "EPHTemp%8.2f<br/>\n", ${$h{TEPHIN}}[1];
-#printf S "EPH27I%8.2f<br/>\n", ${$h{"5HSE202"}}[1];
-#printf S "EPH27V%8.2f<br/>\n", ${$h{ACV_P27V}}[1];
 printf S "<a href=\'snap2.wml'>Index</a><br/>\n";
 printf S "<a href=\'snap_curr.wml'>Current</a><br/>\n";
 printf S "</p></card>\n";
@@ -607,13 +598,12 @@ sub write_curr_wap_arc {
   my %h = @_;
 
 # construct the wireless snapshot archive
-#  text only, to be interpreted and browsed with cgi script
+# text only, to be interpreted and browsed with cgi script
 my $s = sprintf "UTC %s \*%1s\n", ${$h{UTC}}[1], ${$h{UTC}}[2];
 $s .= sprintf "f_ACE %.2e \*%1s\n", ${$h{FLUXACE}}[1], ${$h{FLUXACE}}[2];
-#sprintf "F_ACE %.2e \*%1s\n", #              ${$h{FLUACE}}[1], ${$h{FLUACE}}[2];
 $s .= sprintf "F_CRM %.2e \*%1s\n", ${$h{CRM}}[1], ${$h{CRM}}[2];
 $s .= sprintf "Kp %.1f \*%1s\n", ${$h{KP}}[1], ${$h{KP}}[2];
-$s .= sprintf "R km%7s%s \*%1s\n", ${$h{EPHEM_ALT}}[1],${$h{EPHEM_LEG}}[1], ${$h{EPHEM_ALT}}[2];
+$s .= sprintf "R km%7s%s \*%1s\n", ${$h{EPHEM_ALT}}[1], ${$h{EPHEM_LEG}}[1], ${$h{EPHEM_ALT}}[2];
 return $s;
 }
 
@@ -621,7 +611,7 @@ sub write_wap_arc {
   my %h = @_;
 
 # construct the wireless snapshot archive
-#  text only, to be interpreted and browsed with cgi script
+# text only, to be interpreted and browsed with cgi script
 
 my $wapdir = "/data/mta4/www/WL/Snap_dat";
 
@@ -652,6 +642,7 @@ printf S "OBT %s \*%1s\n", ${$h{OBT}}[1], ${$h{OBT}}[2];
 printf S "EPState %4s \*%1s\n", ${$h{EPSTATE}}[1], ${$h{EPSTATE}}[2];
 printf S "Bus V %6.2f \*%1s\n", ${$h{ELBV}}[1], ${$h{ELBV}}[2];
 printf S "Bus I %6.2f \*%1s\n", ${$h{ELBI_LOW}}[1], ${$h{ELBI_LOW}}[2];
+printf S "PRBus I %6.2f \*%1s\n", ${$h{"2PRBSCR"}}[1], ${$h{"2PRBSCR"}}[2];
 printf S "Bat1SOC %7.2f%% \*%1s\n", ${$h{SOCB1}}[1], ${$h{SOCB1}}[2];
 printf S "Bat2SOC %7.2f%% \*%1s\n", ${$h{SOCB2}}[1], ${$h{SOCB2}}[2];
 printf S "Bat3SOC %7.2f%% \*%1s\n", ${$h{SOCB3}}[1], ${$h{SOCB3}}[2];
@@ -682,6 +673,10 @@ printf S "OBSMode %4s \*%1s\n", ${$h{"2OBNLASL"}}[1], ${$h{"2OBNLASL"}}[2];
 printf S "SHLD HV %4d \*%1s\n", ${$h{"2S2HVST"}}[1], ${$h{"2S2HVST"}}[2];
 printf S "EVT RT  %4d \*%1s\n", ${$h{"2DETBRT"}}[1], ${$h{"2DETBRT"}}[2];
 printf S "SHLD RT %4d \*%1s\n", ${$h{"2SHLDBRT"}}[1], ${$h{"2SHLDBRT"}}[2];
+printf S "-15V %4d \%1s\n", ${$h{"2N15VBVL"}}[1], ${$h{"2N15VBVL"}}[2];
+printf S "+15V %4d \%1s\n", ${$h{"2P15VBVL"}}[1], ${$h{"2P15VBVL"}}[2];
+printf S "+5V %4d \%1s\n", ${$h{"2P05VBVL"}}[1], ${$h{"2P05VBVL"}}[2];
+printf S "+24V %4d \%1s\n", ${$h{"2P24VBVL"}}[1], ${$h{"2P24VBVL"}}[2];
 close S;
 
 open (S, ">>$wapdir/spcad.$date");
@@ -729,10 +724,6 @@ open (S, ">>$wapdir/seph.$date");
 printf S "UTC %s \*%1s\n", ${$h{UTC}}[1], ${$h{UTC}}[2];
 printf S "OBT %s \*%1s\n", ${$h{OBT}}[1], ${$h{OBT}}[2];
 printf S "RadMon     %4s \*%1s\n", ${$h{CORADMEN}}[1], ${$h{CORADMEN}}[2];
-#printf S "EPHIN Geom %4s \*%1s\n", ${$h{GEOM}}[1], ${$h{GEOM}}[2];
-#printf S "E150%11.1f \*%1s\n", ${$h{E150}}[1], ${$h{E150}}[2];
-#printf S "E300%11.1f \*%1s\n", ${$h{E300}}[1], ${$h{E300}}[2];
-#printf S "E1300%10.1f \*%1s\n", ${$h{E1300}}[1], ${$h{E1300}}[2];
 printf S "P4GM%11.1f \*%1s\n", ${$h{P4GM}}[1], ${$h{P4GM}}[2];
 printf S "P41GM%10.1f \*%1s\n", ${$h{P41GM}}[1], ${$h{P41GM}}[2];
 printf S "EPHINTemp%8.2f \*%1s\n", ${$h{"5EPHINT"}}[1], ${$h{"5EPHINT"}}[2];
