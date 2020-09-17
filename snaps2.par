@@ -62,16 +62,22 @@ AOPCADMD	4	pcadmode
 #E1300		4	e1300
 #E150		4	e150
 ###2DETART		4	detart
-2DETBART        4       detbrt
+2DETBART    4   detbrt
 #P4GM		4	p4gm
 #P41GM		4	p41gm
 CCSDSTMF	4	fmt
 ACAFCT		4	imfunc
 AOFSTAR		4	aofstar
 #2SHLDART	4	shldart
-2SHLDBRT        4       shldbrt
+2SHLDBRT    4   shldbrt
 PLINE03T	4	pline03t
 PLINE04T	4	pline04t
 AACCCDPT	4	aacccdpt
 3LDRTNO		4	ldrtno
 #5HSE202		5	hkp27v	26	8
+2N15VBVL    4   n15vbvl
+2P15VBVL    4   p15vbvl
+2P05VBVL    4   p05vbvl
+2P24VBVL    4   p24vbvl
+2PRBSCR     4   prbscr
+
