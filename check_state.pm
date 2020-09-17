@@ -35,7 +35,6 @@ sub check_state {
     
     # Define variables to check
     my @checks;
-    #open KEY, '$work_dir/snaps.par';
     $parfile = "./snaps2.par";
     open KEY, $parfile;
     while (<KEY>) {
@@ -67,14 +66,14 @@ sub check_state {
 
       # use chex
       if ($chk[1] == 1) {
-	$color = $BLU; # Default to blue (not checked or undef)
+        $color = $BLU; # Default to blue (not checked or undef)
         if ($val) {
-	  $match = $chex->match(var => $chk[2], # State variable name
-			        val => $val, # Observed state value
-			        tol => $chk[3]);
+          $match = $chex->match(var => $chk[2], # State variable name
+                                val => $val, # Observed state value
+                                tol => $chk[3]);
 
-	  $color = $RED if ($match == 0); # Bad match => red
-	  $color = $GRN if ($match == 1); # Good match => green
+          $color = $RED if ($match == 0); # Bad match => red
+          $color = $GRN if ($match == 1); # Good match => green
         }
       }
 
@@ -249,17 +248,6 @@ sub letg {
     if ($grat[0] eq $UNDEF) {$color = $BLU;}
     return $color;
 }
-
-#sub e1300 {
-#    my $val = $_[0];
-#    my $radmon = ${$hash{CORADMEN}}[1];
-#    if ($radmon eq 'ENAB') {
-#      if ($val < 6.6) {$color = $GRN;}
-#      if ($val >= 6.6) {$color = $YLW;}
-#      if ($val >= 20.0) {$color = $RED;}
-#    } else {$color = $BLU;}
-#    return $color;
-#}
 
 sub e1300 {
     my $val = $_[0];
@@ -1178,6 +1166,242 @@ sub ldrtno {
   return $color;
 }
 
+
+sub n15vbvl {
+  my $val = $_[0];
+  my $afile = "./.n15vbvlalert";
+  my $tfile = "./.n15vbvlwait";
+  $color = $BLU;
+  if ($val < -10) {
+    $color = $GRN;
+    if (-s $afile) {
+      my $tnum = 3;  # but, wait a little while before deleting lock
+      if (-s $tfile) {
+        open (TF, "<$tfile");
+        $tnum = <TF>;
+        close TF;
+      }
+      $tnum--;
+      if ($tnum == 0) {
+        unlink $afile;
+      }
+      if ($tnum > 0) {
+        open (TF, ">$tfile");
+        print TF $tnum;
+        close TF;
+      }
+    }
+  } # if ($val < -10) {
+  if ($val >= -10) {
+    $color = $RED;
+    my $tnum = 0;  # but, wait a little while before waking people up
+    if (-s $tfile) {
+      open (TF, "<$tfile");
+      $tnum = <TF>;
+      close TF;
+    }
+    $tnum++;
+    if ($tnum == 10) {   # How many cycles? Dan suggested 10 frames
+      send_n15vbvl_alert($val);
+    }
+    if ($tnum <= 10) {
+      open (TF, ">$tfile");
+      print TF $tnum;
+      close TF;
+    }
+  } #if ($val >= -10) {
+  return $color;
+}
+
+
+sub p15vbvl {
+  my $val = $_[0];
+  my $afile = "./.p15vbvlalert";
+  my $tfile = "./.p15vbvlwait";
+  $color = $BLU;
+  if ($val > 10) {
+    $color = $GRN;
+    if (-s $afile) {
+      my $tnum = 3;  # but, wait a little while before deleting lock
+      if (-s $tfile) {
+        open (TF, "<$tfile");
+        $tnum = <TF>;
+        close TF;
+      }
+      $tnum--;
+      if ($tnum == 0) {
+        unlink $afile;
+      }
+      if ($tnum > 0) {
+        open (TF, ">$tfile");
+        print TF $tnum;
+        close TF;
+      }
+    }
+  } # if ($val > 10) {
+  if ($val <= 10) {
+    $color = $RED;
+    my $tnum = 0;  # but, wait a little while before waking people up
+    if (-s $tfile) {
+      open (TF, "<$tfile");
+      $tnum = <TF>;
+      close TF;
+    }
+    $tnum++;
+    if ($tnum == 10) {   # How many cycles? Dan suggested 10 frames
+      send_p15vbvl_alert($val);
+    }
+    if ($tnum <= 10) {
+      open (TF, ">$tfile");
+      print TF $tnum;
+      close TF;
+    }
+  } #if ($val <= 10) {
+  return $color;
+}
+
+
+sub p05vbvl {
+  my $val = $_[0];
+  my $afile = "./.p05vbvlalert";
+  my $tfile = "./.p05vbvlwait";
+  $color = $BLU;
+  if ($val > 4) {
+    $color = $GRN;
+    if (-s $afile) {
+      my $tnum = 3;  # but, wait a little while before deleting lock
+      if (-s $tfile) {
+        open (TF, "<$tfile");
+        $tnum = <TF>;
+        close TF;
+      }
+      $tnum--;
+      if ($tnum == 0) {
+        unlink $afile;
+      }
+      if ($tnum > 0) {
+        open (TF, ">$tfile");
+        print TF $tnum;
+        close TF;
+      }
+    }
+  } # if ($val > 4) {
+  if ($val <= 4) {
+    $color = $RED;
+    my $tnum = 0;  # but, wait a little while before waking people up
+    if (-s $tfile) {
+      open (TF, "<$tfile");
+      $tnum = <TF>;
+      close TF;
+    }
+    $tnum++;
+    if ($tnum == 10) {   # How many cycles? Dan suggested 10 frames
+      send_p05vbvl_alert($val);
+    }
+    if ($tnum <= 10) {
+      open (TF, ">$tfile");
+      print TF $tnum;
+      close TF;
+    }
+  } #if ($val <= 4) {
+  return $color;
+}
+
+
+sub p24vbvl {
+  my $val = $_[0];
+  my $afile = "./.p24vbvlalert";
+  my $tfile = "./.p24vbvlwait";
+  $color = $BLU;
+  if ($val > 23) {
+    $color = $GRN;
+    if (-s $afile) {
+      my $tnum = 3;  # but, wait a little while before deleting lock
+      if (-s $tfile) {
+        open (TF, "<$tfile");
+        $tnum = <TF>;
+        close TF;
+      }
+      $tnum--;
+      if ($tnum == 0) {
+        unlink $afile;
+      }
+      if ($tnum > 0) {
+        open (TF, ">$tfile");
+        print TF $tnum;
+        close TF;
+      }
+    }
+  } # if ($val > 23) {
+  if ($val <= 23) {
+    $color = $RED;
+    my $tnum = 0;  # but, wait a little while before waking people up
+    if (-s $tfile) {
+      open (TF, "<$tfile");
+      $tnum = <TF>;
+      close TF;
+    }
+    $tnum++;
+    if ($tnum == 10) {   # How many cycles? Dan suggested 10 frames
+      send_p24vbvl_alert($val);
+    }
+    if ($tnum <= 10) {
+      open (TF, ">$tfile");
+      print TF $tnum;
+      close TF;
+    }
+  } #if ($val <= 23) {
+  return $color;
+}
+
+
+sub prbscr {
+  my $val = $_[0];
+  my $afile = "./.prbscralert";
+  my $tfile = "./.prbscrwait";
+  $color = $BLU;
+  if ($val < 2.0 && $val > -1.3) {
+    $color = $GRN;
+    if (-s $afile) {
+      my $tnum = 3;  # but, wait a little while before deleting lock
+      if (-s $tfile) {
+        open (TF, "<$tfile");
+        $tnum = <TF>;
+        close TF;
+      }
+      $tnum--;
+      if ($tnum == 0) {
+        unlink $afile;
+      }
+      if ($tnum > 0) {
+        open (TF, ">$tfile");
+        print TF $tnum;
+        close TF;
+      }
+    }
+  } # if ($val < 2.0 && $val > -1.3) {
+  if ($val >= 2 || $val <= -1.3) {
+    $color = $RED;
+    my $tnum = 0;  # but, wait a little while before waking people up
+    if (-s $tfile) {
+      open (TF, "<$tfile");
+      $tnum = <TF>;
+      close TF;
+    }
+    $tnum++;
+    if ($tnum == 3) {   # How many cycles?
+      send_prbscr_alert($val);
+    }
+    if ($tnum <= 10) {
+      open (TF, ">$tfile");
+      print TF $tnum;
+      close TF;
+    }
+  } #if ($val < 2.0 && $val > -1.3) {
+  return $color;
+}
+
+
 sub send_tank_red {
   my $obstime = ${$hash{PMTANKP}}[0];
   if (! time_curr($obstime)) {
@@ -1786,6 +2010,126 @@ sub send_ldrtno_alert {
     close FILE;
 
     open MAIL, "|mailx -s 3LDRTNO sot_red_alert\@cfa.harvard.edu";
+    open FILE, $afile;
+    while (<FILE>) {
+      print MAIL $_;
+    }
+    close FILE;
+    close MAIL;
+  }
+}
+
+sub send_n15vbvl_alert {
+  my $obstime = ${$hash{"2N15VBVL"}}[0];
+  if (! time_curr($obstime)) {
+    return;
+  }
+  my $afile = "./.n15vbvlalert";
+  if (-s $afile) {
+  } else {
+    open FILE, ">$afile";
+    print FILE "Chandra realtime telemetry shows  2N15VBVL = $_[0] V at $obt UT\n";
+    print FILE "Limit < -10 V\n\n";
+    print FILE "This message sent to sot_red_alert\n";
+    close FILE;
+
+    open MAIL, "|mailx -s 2N15VBVL sot_red_alert\@cfa.harvard.edu";
+    open FILE, $afile;
+    while (<FILE>) {
+      print MAIL $_;
+    }
+    close FILE;
+    close MAIL;
+  }
+}
+
+sub send_p15vbvl_alert {
+  my $obstime = ${$hash{"2P15VBVL"}}[0];
+  if (! time_curr($obstime)) {
+    return;
+  }
+  my $afile = "./.p15vbvlalert";
+  if (-s $afile) {
+  } else {
+    open FILE, ">$afile";
+    print FILE "Chandra realtime telemetry shows  2P15VBVL = $_[0] V at $obt UT\n";
+    print FILE "Limit > 10 V\n\n";
+    print FILE "This message sent to sot_red_alert\n";
+    close FILE;
+
+    open MAIL, "|mailx -s 2P15VBVL sot_red_alert\@cfa.harvard.edu";
+    open FILE, $afile;
+    while (<FILE>) {
+      print MAIL $_;
+    }
+    close FILE;
+    close MAIL;
+  }
+}
+
+sub send_p05vbvl_alert {
+  my $obstime = ${$hash{"2P05VBVL"}}[0];
+  if (! time_curr($obstime)) {
+    return;
+  }
+  my $afile = "./.p05vbvlalert";
+  if (-s $afile) {
+  } else {
+    open FILE, ">$afile";
+    print FILE "Chandra realtime telemetry shows  2P05VBVL = $_[0] V at $obt UT\n";
+    print FILE "Limit > 4 V\n\n";
+    print FILE "This message sent to sot_red_alert\n";
+    close FILE;
+
+    open MAIL, "|mailx -s 2P05VBVL sot_red_alert\@cfa.harvard.edu";
+    open FILE, $afile;
+    while (<FILE>) {
+      print MAIL $_;
+    }
+    close FILE;
+    close MAIL;
+  }
+}
+
+sub send_p24vbvl_alert {
+  my $obstime = ${$hash{"2P24VBVL"}}[0];
+  if (! time_curr($obstime)) {
+    return;
+  }
+  my $afile = "./.p24vbvlalert";
+  if (-s $afile) {
+  } else {
+    open FILE, ">$afile";
+    print FILE "Chandra realtime telemetry shows  2P24VBVL = $_[0] V at $obt UT\n";
+    print FILE "Limit > 23 V\n\n";
+    print FILE "This message sent to sot_red_alert\n";
+    close FILE;
+
+    open MAIL, "|mailx -s 2P24VBVL sot_red_alert\@cfa.harvard.edu";
+    open FILE, $afile;
+    while (<FILE>) {
+      print MAIL $_;
+    }
+    close FILE;
+    close MAIL;
+  }
+}
+
+sub send_prbscr_alert {
+  my $obstime = ${$hash{"2PRBSCR"}}[0];
+  if (! time_curr($obstime)) {
+    return;
+  }
+  my $afile = "./.prbscralert";
+  if (-s $afile) {
+  } else {
+    open FILE, ">$afile";
+    print FILE "Chandra realtime telemetry shows  2PRBSCR = $_[0] A at $obt UT\n";
+    print FILE "Limit < 2 A and > -1.3 A\n\n";
+    print FILE "This message sent to sot_red_alert\n";
+    close FILE;
+
+    open MAIL, "|mailx -s 2PRBSCR sot_red_alert\@cfa.harvard.edu";
     open FILE, $afile;
     while (<FILE>) {
       print MAIL $_;
