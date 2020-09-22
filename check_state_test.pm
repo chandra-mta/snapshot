@@ -35,7 +35,6 @@ sub check_state {
     
     # Define variables to check
     my @checks;
-    #open KEY, '$work_dir/snaps.par';
     $parfile = "./snaps2.par";
     open KEY, $parfile;
     while (<KEY>) {
@@ -67,14 +66,14 @@ sub check_state {
 
       # use chex
       if ($chk[1] == 1) {
-	$color = $BLU; # Default to blue (not checked or undef)
+        $color = $BLU; # Default to blue (not checked or undef)
         if ($val) {
-	  $match = $chex->match(var => $chk[2], # State variable name
-			        val => $val, # Observed state value
-			        tol => $chk[3]);
+          $match = $chex->match(var => $chk[2], # State variable name
+                                val => $val, # Observed state value
+                                tol => $chk[3]);
 
-	  $color = $RED if ($match == 0); # Bad match => red
-	  $color = $GRN if ($match == 1); # Good match => green
+          $color = $RED if ($match == 0); # Bad match => red
+          $color = $GRN if ($match == 1); # Good match => green
         }
       }
 
@@ -186,8 +185,8 @@ sub pcadmode {
     if ($grat[0] eq $UNDEF) {
       if ($val eq 'NMAN') {$color = $GRN;}
     }
-    my $afile = "./.nsunalert";
-    my $tfile = "./.nsunwait";
+    my $afile = ".nsunalert";
+    my $tfile = ".nsunwait";
     if ($val eq 'NPNT' || $val eq 'NMAN') {
       if (-s $afile) {
         my $tnum = 3;  # but, wait a little while before deleting lock
@@ -249,17 +248,6 @@ sub letg {
     if ($grat[0] eq $UNDEF) {$color = $BLU;}
     return $color;
 }
-
-#sub e1300 {
-#    my $val = $_[0];
-#    my $radmon = ${$hash{CORADMEN}}[1];
-#    if ($radmon eq 'ENAB') {
-#      if ($val < 6.6) {$color = $GRN;}
-#      if ($val >= 6.6) {$color = $YLW;}
-#      if ($val >= 20.0) {$color = $RED;}
-#    } else {$color = $BLU;}
-#    return $color;
-#}
 
 sub e1300 {
     my $val = $_[0];
@@ -437,8 +425,8 @@ sub scs133 {
 }
 sub scs107 {
     my $val = $_[0];
-    my $afile = "./.scs107alert";
-    my $tfile = "./.scs107wait";
+    my $afile = ".scs107alert";
+    my $tfile = ".scs107wait";
     $color = $BLU;
     if (${$hash{COTLRDSF}}[1] eq 'EPS') {
       $color = $YLW;
@@ -463,9 +451,6 @@ sub scs107 {
         }
       }
       if (($val eq 'ACT' || $val eq 'DISA') && ${$hash{COSCS131S}}[1] ne 'ACT' && ${$hash{COSCS132S}}[1] ne 'ACT' && ${$hash{COSCS133S}}[1] ne 'ACT') {
-      #if (($val eq 'ACT' || $val eq 'DISA') && ${$hash{COSCS128S}}[1] ne 'ACT' && ${$hash{COSCS129S}}[1] ne 'ACT' && ${$hash{COSCS130S}}[1] ne 'ACT') {
-      # add extra checks, rhodes is being shifty 08/12/03 bds
-      #if ($val eq 'DISA') {
         $color = $RED;
         my $tnum = 0;  # but, wait a little while before waking people up
         if (-s $tfile) {
@@ -492,10 +477,10 @@ sub scs107 {
 
 sub pmtankp {
   my $val = $_[0];
-  my $ayfile = "./.ytankalert";
-  my $tyfile = "./.ytankwait";
-  my $arfile = "./.rtankalert";
-  my $trfile = "./.rtankwait";
+  my $ayfile = ".ytankalert";
+  my $tyfile = ".ytankwait";
+  my $arfile = ".rtankalert";
+  my $trfile = ".rtankwait";
   if ($val > 175) {unlink $trfile;}
   $color = $YLW;
   if ($val < 180 && $val >= 175) {
@@ -538,8 +523,8 @@ sub pmtankp {
 
 sub aofstar {
   my $val = $_[0];
-  my $afile = "./.britalert";
-  my $tfile = "./.britwait";
+  my $afile = ".britalert";
+  my $tfile = ".britwait";
   $color = $YLW;
   if ($val eq 'GUID') {
     $color = $GRN;
@@ -584,8 +569,8 @@ sub aofstar {
       
 sub aocpestl {
   my $val = $_[0];
-  my $afile = "./.cpealert";
-  my $tfile = "./.cpewait";
+  my $afile = ".cpealert";
+  my $tfile = ".cpewait";
   $color = $YLW;
   if ($val eq 'NORM') {
     $color = $GRN;
@@ -644,7 +629,7 @@ sub fmt {
 
 sub airu1g1i {
     my $val = $_[0];
-    my $tfile = "./.gyrowait";
+    my $tfile = ".gyrowait";
     $color = $BLU;
     if ($val < 150) { $color =$GRN;}
     if ($val >= 150 && $val < 200) { $color =$YLW;}
@@ -674,9 +659,9 @@ sub airu1g1i {
 
 sub ctxapwr {
   my $val = $_[0];
-  my $afile = "./.ctxpwralert";
-  my $tfile = "./.ctxpwrwait";
-  my $dfile = "./.ctxpwrdel";
+  my $afile = ".ctxpwralert";
+  my $tfile = ".ctxpwrwait";
+  my $dfile = ".ctxpwrdel";
   my $ctxa_pwr_lim=36.75;
   # pwr is noisy, so we need two lock files send alert after
   #  10 violations rearm after 50 non-violations.
@@ -728,9 +713,9 @@ sub ctxapwr {
 
 sub ctxbpwr {
   my $val = $_[0];
-  my $afile = "./.ctxpwralert";
-  my $tfile = "./.ctxpwrwait";
-  my $dfile = "./.ctxpwrdel";
+  my $afile = ".ctxpwralert";
+  my $tfile = ".ctxpwrwait";
+  my $dfile = ".ctxpwrdel";
   my $ctxb_pwr_lim=36.75;
   # pwr is noisy, so we need two lock files send alert after
   #  10 violations rearm after 50 non-violations.
@@ -782,8 +767,8 @@ sub ctxbpwr {
 
 sub ctxav {
   my $val = $_[0];
-  my $afile = "./.ctxvalert";
-  my $tfile = "./.ctxvwait";
+  my $afile = ".ctxvalert";
+  my $tfile = ".ctxvwait";
   $color = $GRN;
   if ($val < 3.60) {
     $color = $GRN;
@@ -829,8 +814,8 @@ sub ctxav {
 
 sub ctxbv {
   my $val = $_[0];
-  my $afile = "./.ctxvalert";
-  my $tfile = "./.ctxvwait";
+  my $afile = ".ctxvalert";
+  my $tfile = ".ctxvwait";
   $color = $GRN;
   if ($val < 3.60) {
     $color = $GRN;
@@ -876,8 +861,8 @@ sub ctxbv {
 
 sub hkp27v {
   my ($val,$stat,$prev,$pstat,$lim,$abs_diff)=@_;
-  my $afile = "./.hkp27valert";
-  my $tfile = "./.hkp27vwait";
+  my $afile = ".hkp27valert";
+  my $tfile = ".hkp27vwait";
   #print "HKP27V  $val $stat $lim\n";
   $color = $WHT;
   if ($stat % 2 == 1) {
@@ -1176,23 +1161,257 @@ sub ldrtno {
   return $color;
 }
 
+
+sub n15vbvl {
+  my $val = $_[0];
+  my $afile = ".n15vbvlalert";
+  my $tfile = ".n15vbvlwait";
+  $color = $BLU;
+  if ($val < -10) {
+    $color = $GRN;
+    if (-s $afile) {
+      my $tnum = 3;  # but, wait a little while before deleting lock
+      if (-s $tfile) {
+        open (TF, "<$tfile");
+        $tnum = <TF>;
+        close TF;
+      }
+      $tnum--;
+      if ($tnum == 0) {
+        unlink $afile;
+      }
+      if ($tnum > 0) {
+        open (TF, ">$tfile");
+        print TF $tnum;
+        close TF;
+      }
+    }
+  } # if ($val < -10) {
+  if ($val >= -10) {
+    $color = $RED;
+    my $tnum = 0;  # but, wait a little while before waking people up
+    if (-s $tfile) {
+      open (TF, "<$tfile");
+      $tnum = <TF>;
+      close TF;
+    }
+    $tnum++;
+    if ($tnum == 10) {   # How many cycles? Dan suggested 10 frames
+      send_n15vbvl_alert($val);
+    }
+    if ($tnum <= 10) {
+      open (TF, ">$tfile");
+      print TF $tnum;
+      close TF;
+    }
+  } #if ($val >= -10) {
+  return $color;
+}
+
+
+sub p15vbvl {
+  my $val = $_[0];
+  my $afile = ".p15vbvlalert";
+  my $tfile = ".p15vbvlwait";
+  $color = $BLU;
+  if ($val > 10) {
+    $color = $GRN;
+    if (-s $afile) {
+      my $tnum = 3;  # but, wait a little while before deleting lock
+      if (-s $tfile) {
+        open (TF, "<$tfile");
+        $tnum = <TF>;
+        close TF;
+      }
+      $tnum--;
+      if ($tnum == 0) {
+        unlink $afile;
+      }
+      if ($tnum > 0) {
+        open (TF, ">$tfile");
+        print TF $tnum;
+        close TF;
+      }
+    }
+  } # if ($val > 10) {
+  if ($val <= 10) {
+    $color = $RED;
+    my $tnum = 0;  # but, wait a little while before waking people up
+    if (-s $tfile) {
+      open (TF, "<$tfile");
+      $tnum = <TF>;
+      close TF;
+    }
+    $tnum++;
+    if ($tnum == 10) {   # How many cycles? Dan suggested 10 frames
+      send_p15vbvl_alert($val);
+    }
+    if ($tnum <= 10) {
+      open (TF, ">$tfile");
+      print TF $tnum;
+      close TF;
+    }
+  } #if ($val <= 10) {
+  return $color;
+}
+
+
+sub p05vbvl {
+  my $val = $_[0];
+  my $afile = ".p05vbvlalert";
+  my $tfile = ".p05vbvlwait";
+  $color = $BLU;
+  if ($val > 4) {
+    $color = $GRN;
+    if (-s $afile) {
+      my $tnum = 3;  # but, wait a little while before deleting lock
+      if (-s $tfile) {
+        open (TF, "<$tfile");
+        $tnum = <TF>;
+        close TF;
+      }
+      $tnum--;
+      if ($tnum == 0) {
+        unlink $afile;
+      }
+      if ($tnum > 0) {
+        open (TF, ">$tfile");
+        print TF $tnum;
+        close TF;
+      }
+    }
+  } # if ($val > 4) {
+  if ($val <= 4) {
+    $color = $RED;
+    my $tnum = 0;  # but, wait a little while before waking people up
+    if (-s $tfile) {
+      open (TF, "<$tfile");
+      $tnum = <TF>;
+      close TF;
+    }
+    $tnum++;
+    if ($tnum == 10) {   # How many cycles? Dan suggested 10 frames
+      send_p05vbvl_alert($val);
+    }
+    if ($tnum <= 10) {
+      open (TF, ">$tfile");
+      print TF $tnum;
+      close TF;
+    }
+  } #if ($val <= 4) {
+  return $color;
+}
+
+
+sub p24vbvl {
+  my $val = $_[0];
+  my $afile = ".p24vbvlalert";
+  my $tfile = ".p24vbvlwait";
+  $color = $BLU;
+  if ($val > 23) {
+    $color = $GRN;
+    if (-s $afile) {
+      my $tnum = 3;  # but, wait a little while before deleting lock
+      if (-s $tfile) {
+        open (TF, "<$tfile");
+        $tnum = <TF>;
+        close TF;
+      }
+      $tnum--;
+      if ($tnum == 0) {
+        unlink $afile;
+      }
+      if ($tnum > 0) {
+        open (TF, ">$tfile");
+        print TF $tnum;
+        close TF;
+      }
+    }
+  } # if ($val > 23) {
+  if ($val <= 23) {
+    $color = $RED;
+    my $tnum = 0;  # but, wait a little while before waking people up
+    if (-s $tfile) {
+      open (TF, "<$tfile");
+      $tnum = <TF>;
+      close TF;
+    }
+    $tnum++;
+    if ($tnum == 10) {   # How many cycles? Dan suggested 10 frames
+      send_p24vbvl_alert($val);
+    }
+    if ($tnum <= 10) {
+      open (TF, ">$tfile");
+      print TF $tnum;
+      close TF;
+    }
+  } #if ($val <= 23) {
+  return $color;
+}
+
+
+sub prbscr {
+  my $val = $_[0];
+  my $afile = ".prbscralert";
+  my $tfile = ".prbscrwait";
+  $color = $BLU;
+  if ($val < 2.0 && $val > -1.3) {
+    $color = $GRN;
+    if (-s $afile) {
+      my $tnum = 3;  # but, wait a little while before deleting lock
+      if (-s $tfile) {
+        open (TF, "<$tfile");
+        $tnum = <TF>;
+        close TF;
+      }
+      $tnum--;
+      if ($tnum == 0) {
+        unlink $afile;
+      }
+      if ($tnum > 0) {
+        open (TF, ">$tfile");
+        print TF $tnum;
+        close TF;
+      }
+    }
+  } # if ($val < 2.0 && $val > -1.3) {
+  if ($val >= 2 || $val <= -1.3) {
+    $color = $RED;
+    my $tnum = 0;  # but, wait a little while before waking people up
+    if (-s $tfile) {
+      open (TF, "<$tfile");
+      $tnum = <TF>;
+      close TF;
+    }
+    $tnum++;
+    if ($tnum == 3) {   # How many cycles?
+      send_prbscr_alert($val);
+    }
+    if ($tnum <= 10) {
+      open (TF, ">$tfile");
+      print TF $tnum;
+      close TF;
+    }
+  } #if ($val < 2.0 && $val > -1.3) {
+  return $color;
+}
+
+
 sub send_tank_red {
   my $obstime = ${$hash{PMTANKP}}[0];
-  if (! time_curr($obstime)) {
-    return;
-  }
+  #if (! time_curr($obstime)) {
+  #  return;
+  #}
   my $afile = ".rtankalert";
   if (-s $afile) {
   } else {
     open FILE, ">$afile";
-    printf FILE "BUOCC BUOCC BUOCC\n\n";
+    print FILE "TEST TEST TEST\n\n";
     printf FILE "Chandra realtime telemetry shows PMTANKP %5.1f at $obt UT\n\n",$_[0];
     print FILE "\nSnapshot:\n";
-    print FILE "http://cfa.cxc.harvard.edu/mta/Snapshot/BUOCC/snap.cgi\n"; #debug
+    print FILE "http://cxc.harvard.edu/cgi-gen/mta/Snap/snap.cgi\n";
     close FILE;
-    #open MAIL, "|mailx -s PMTANKP_test brad\@head.cfa.harvard.edu,swolk";
-    #old_lukeopen MAIL, "|mailx -s 'PMTANKP SIM' brad\@head.cfa.harvard.edu";
-    #open MAIL, "|more"; #debug
+    open MAIL, "|mailx -s 'TEST: PMTANKP' msobolewska\@cfa.harvard.edu";
     open FILE, $afile;
     while (<FILE>) {
       print MAIL $_;
@@ -1204,22 +1423,20 @@ sub send_tank_red {
 
 sub send_tank_yellow {
   my $obstime = ${$hash{PMTANKP}}[0];
-  if (! time_curr($obstime)) {
-    return;
-  }
+  #if (! time_curr($obstime)) {
+  #  return;
+  #}
   my $afile = ".ytankalert";
   if (-s $afile) {
   } else {
     open FILE, ">$afile";
     print FILE " \n";
-    printf FILE "BUOCC BUOCC BUOCC\n\n";
+    print FILE "TEST TEST TEST\n\n";
     printf FILE "Chandra realtime telemetry shows PMTANKP %6.2f PSI at %s UT\n\n",$_[0],$obt;
     print FILE "\nSnapshot:\n";
-    print FILE "http://cfa.cxc.harvard.edu/mta/Snapshot/BUOCC/snap.cgi\n"; #debug
+    print FILE "http://cxc.harvard.edu/cgi-gen/mta/Snap/snap.cgi\n";
     close FILE;
-    #open MAIL, "|mailx -s PMTANKP brad\@head.cfa.harvard.edu";
-    #old_lukeopen MAIL, "|mailx -s 'PMTANKP SIM' brad\@head.cfa.harvard.edu";
-    #open MAIL, "|more"; #debug
+    open MAIL, "|mailx -s 'TEST: PMTANKP' msobolewska\@cfa.harvard.edu";
     open FILE, $afile;
     while (<FILE>) {
       print MAIL $_;
@@ -1235,18 +1452,16 @@ sub send_107_alert {
   #if (! time_curr($obstime)) {
     #return;
   #}
-  #my $afile = "$work_dir/.scs107alert";
   my $afile = ".scs107alert";
-  #my $comfile = "/pool14/chandra/DSN.schedule";
   my $comfile = "/data/mta4/proj/rac/ops/ephem/dsn_summary.dat";
   if (-s $afile) {
   } else {
     open FILE, ">$afile";
-    #print FILE "  THIS IS ONLY A TEST !!!! \n\n"; #debug
-    #print FILE "(Testing ... I wasn't working before, but now I am)\n"; #debug
-    printf FILE "BUOCC BUOCC BUOCC\n\n";
-    print FILE "Chandra realtime telemetry shows SCS107 $_[0] at $obt UT\n\n";
-    print FILE "\nTelecon on 1-844-467-6272 111165\# now.\n";
+    print FILE "TEST TEST TEST\n\n";
+    print FILE "Chandra realtime telemetry shows SCS107 $_[0] at $obt UT\n";
+    print FILE "Check email for info.\n";
+    print FILE "\nTelecon on \#609-829-8540 PIN 132 194 285\# : meet.google.com/fmc-gusj-eos\n";
+    print FILE "A reminder, this may be connected to the voice loops at OCC\n";
     # try to figure out next comm passes
     open COMS, $comfile;
     <COMS>;
@@ -1256,11 +1471,8 @@ sub send_107_alert {
     my $day = $time[1] + ($time[2]/24) + ($time[3]/1440);
     while (<COMS>) {
       my @line = split(" ", $_);
-      #print FILE "$time[0] $time[1] $time[2] $time[3]\n"; # debug
-      #print FILE "$line[0] $line[4] $line[6] $line[7]\n"; # debug
       if ($line[10] < $time[0]) {next;}
       if ($line[14] < $time[1]) {next;}
-      #if ($line[7] < ("$time[2]"."$time[3]")) {next;}
       if ($line[13] < $day) {next;}
       my @next = split(/\./, $line[11]);
       print FILE "Current pass:  $line[10]:$line[0]\n";
@@ -1278,23 +1490,11 @@ sub send_107_alert {
     }
       
     print FILE "\nSnapshot:\n";
-    print FILE "http://cfa.cxc.harvard.edu/mta/Snapshot/BUOCC/snap.cgi\n"; #debug
-    #print FILE "http://cfa.cxc.harvard.edu/mta_days/MIRROR/Snapshot/BUOCC/snap.cgi\n"; #debug
-    #print FILE "This message sent to brad\n"; #debug
-    print FILE "This message sent to malgosia\n"; #debug
-    printf FILE "BUOCC BUOCC BUOCC TEST\n\n";
-    #print FILE "This message sent to brad rac swolk\n"; #debug
-    #print FILE "This message sent to brad\n"; #debug
-    #print FILE "\n TEST   TEST   TEST   TEST   TEST   TEST   TEST\n"; #debug
+    print FILE "http://cxc.harvard.edu/cgi-gen/mta/Snap/snap.cgi\n";
+    print FILE "This message sent to malgosia\n";
     close FILE;
 
-    #open MAIL, "|mail brad\@head.cfa.harvard.edu swolk\@head.cfa.harvard.edu rac\@head.cfa.harvard.edu";
-    #open MAIL, "|mail brad\@head.cfa.harvard.edu swolk\@head.cfa.harvard.edu";
-    #open MAIL, "|mail brad\@head.cfa.harvard.edu";
-    #open MAIL, "|mailx -s SCS107 brad\@head.cfa.harvard.edu";
-    open MAIL, "|mailx -s 'SCS107 TEST'  lpulgarinduque\@cfa.harvard.edu";
-    #open MAIL, "|mailx -s SCS107 brad\@head.cfa.harvard.edu";
-    #open MAIL, "|more"; #debug
+    open MAIL, "|mailx -s 'TEST: SCS107' msobolewska\@cfa.harvard.edu";
     open FILE, $afile;
     while (<FILE>) {
       print MAIL $_;
@@ -1314,7 +1514,11 @@ sub send_nsun_alert {
   if (-s $afile) {
   } else {
     open FILE, ">$afile";
+    print FILE "TEST TEST TEST\n\n";
     print FILE "Chandra realtime telemetry shows PCADMODE $_[0] at $obt UT\n\n";
+    print FILE "Check email for info.\n";
+    print FILE "\nTelecon on\#609-829-8540 PIN 132 194 285\# : meet.google.com/fmc-gusj-eos\n";
+    print FILE "A reminder, this may be connected to the voice loops at OCC\n";
     # try to figure out next comm passes
     open COMS, $comfile;
     my @time = split(":", $obt);
@@ -1322,11 +1526,8 @@ sub send_nsun_alert {
     my $day = $time[1] + ($time[2]/24) + ($time[3]/1440);
     while (<COMS>) {
       my @line = split(" ", $_);
-      #print FILE "$time[0] $time[1] $time[2] $time[3]\n"; # debug
-      #print FILE "$line[0] $line[4] $line[6] $line[7]\n"; # debug
       if ($line[0] < $time[0]) {next;}
       if ($line[4] < $time[1]) {next;}
-      #if ($line[7] < ("$time[2]"."$time[3]")) {next;}
       if ($line[3] < $day) {next;}
       my @next = split(/\./, $line[1]);
       print FILE "Current pass:  $line[0]:$next[0]:$line[6] to $line[7]\n";
@@ -1344,19 +1545,11 @@ sub send_nsun_alert {
     }
       
     print FILE "\nSnapshot:\n";
-    print FILE "http://cfa.cxc.harvard.edu/mta/Snapshot/BUOCC/snap.cgi\n"; #debug
-    #print FILE "This message sent to brad\n"; #debug
-    print FILE "This message sent to malgosia\n"; #debug
-    printf FILE "BUOCC BUOCC BUOCC TEST\n\n";
-    #print FILE "This message sent to brad swolk\n"; #debug
-    #print FILE "\n TEST   TEST   TEST   TEST   TEST   TEST   TEST\n"; #debug
+    print FILE "http://cxc.harvard.edu/cgi-gen/mta/Snap/snap.cgi\n";
+    print FILE "This message sent to malgosia\n";
     close FILE;
 
-    #open MAIL, "|mailx -s NSUN brad\@head.cfa.harvard.edu swolk\@head.cfa.harvard.edu";
-    #open MAIL, "|mailx -s NSUN brad\@head.cfa.harvard.edu";
-    open MAIL, "|mailx -s 'NSUN TEST' lpulgarinduque\@cfa.harvard.edu";
-    #open MAIL, "|mailx -s NSUN brad\@head.cfa.harvard.edu operators\@head.cfa.harvard.edu";
-    #open MAIL, "|more"; #debug
+    open MAIL, "|mailx -s 'TEST: NSUN' msobolewska\@cfa.harvard.edu";
     open FILE, $afile;
     while (<FILE>) {
       print MAIL $_;
@@ -1376,16 +1569,15 @@ sub send_sim_unsafe_alert {
   if (-s $afile) {
   } else {
     open FILE, ">$afile";
-    printf FILE "BUOCC BUOCC BUOCC TEST\n\n";
-    print FILE "Chandra realtime telemetry shows SCS107 DISABLED and BUOCC at $_[0] at $obt UT\n\n";
+    print FILE "TEST TEST TEST\n\n";
+    print FILE "Chandra realtime telemetry shows SCS107 DISABLED and SIM at $_[0] at $obt UT\n\n";
       
     print FILE "\nSnapshot:\n";
-    print FILE "http://cfa.cxc.harvard.edu/mta/Snapshot/BUOCC/snap.cgi\n"; #debug
-    print FILE "This message sent to malgosia\n"; #debug
+    print FILE "http://cxc.harvard.edu/cgi-gen/mta/Snap/snap.cgi\n";
+    print FILE "This message sent to malgosia\n";
     close FILE;
 
-    open MAIL, "|mailx -s 'UNSAFE! BUOCC ' lpulgarinduque\@cfa.harvard.edu";
-    #open MAIL, "|mailx -s SIM_UNSAFE! brad\@head.cfa.harvard.edu";
+    open MAIL, "|mailx -s 'TEST: UNSAFE!' msobolewska\@cfa.harvard.edu";
     open FILE, $afile;
     while (<FILE>) {
       print MAIL $_;
@@ -1404,18 +1596,15 @@ sub send_hrc_shld_alert {
   if (-s $afile) {
   } else {
     open FILE, ">$afile";
-    printf FILE "BUOCC BUOCC BUOCC TEST\n\n";
+    print FILE "TEST TEST TEST\n\n";
     printf FILE "Chandra realtime telemetry shows HRC SHIELD RATE of %3d at $obt UT\n",$_[0];
       
     print FILE "\nSnapshot:\n";
-    print FILE "http://cfa.cxc.harvard.edu/mta/Snapshot/BUOCC/snap.cgi\n"; #debug
-    print FILE "This message sent to malgosia\n"; #debug
+    print FILE "http://cxc.harvard.edu/cgi-gen/mta/Snap/snap.cgi\n";
+    print FILE "This message sent to malgosia\n";
     close FILE;
 
-    #open MAIL, "|mailx -s 'HRC SHIELD' brad\@head.cfa.harvard.edu";
-    #open MAIL, "|mailx -s 'HRC SHIELD' brad\@head.cfa.harvard.edu swolk\@head.cfa.harvard.edu";
-    #open MAIL, "|mailx -s 'HRC SHIELD' sot_lead\@head.cfa.harvard.edu brad\@head.cfa.harvard.edu";
-    open MAIL, "|mailx -s 'HRC SHIELD TEST' lpulgarinduque\@cfa.harvard.edu";
+    open MAIL, "|mailx -s 'TEST: HRC SHIELD' msobolewska\@cfa.harvard.edu";
     open FILE, $afile;
     while (<FILE>) {
       print MAIL $_;
@@ -1437,10 +1626,11 @@ sub send_brit_alert {
   if (-s $afile) {
   } else {
     open FILE, ">$afile";
-    #print FILE "  THIS IS ONLY A TEST !!!! \n\n"; #debug
-    #print FILE "(Testing ... I wasn't working before, but now I am)\n"; #debug
-    printf FILE "BUOCC BUOCC BUOCC TEST\n\n";
-    print FILE "Chandra realtime telemetry shows AOFSTAR $_[0] at $obt UT\n\n";
+    print FILE "TEST TEST TEST\n\n";
+    print FILE "Chandra realtime telemetry shows AOFSTAR $_[0] at $obt UT\n";
+    print FILE "Check email for info.\n";
+    print FILE "\nTelecon on \#609-829-8540 PIN 132 194 285\# : meet.google.com/fmc-gusj-eos \n";
+    print FILE "A reminder, this may be connected to the voice loops at OCC\n";
     # try to figure out next comm passes
     open COMS, $comfile;
     my @time = split(":", $obt);
@@ -1448,11 +1638,8 @@ sub send_brit_alert {
     my $day = $time[1] + ($time[2]/24) + ($time[3]/1440);
     while (<COMS>) {
       my @line = split(" ", $_);
-      #print FILE "$time[0] $time[1] $time[2] $time[3]\n"; # debug
-      #print FILE "$line[0] $line[4] $line[6] $line[7]\n"; # debug
       if ($line[0] < $time[0]) {next;}
       if ($line[4] < $time[1]) {next;}
-      #if ($line[7] < ("$time[2]"."$time[3]")) {next;}
       if ($line[3] < $day) {next;}
       my @next = split(/\./, $line[1]);
       print FILE "Current pass:  $line[0]:$next[0]:$line[6] to $line[7]\n";
@@ -1470,23 +1657,11 @@ sub send_brit_alert {
     }
       
     print FILE "\nSnapshot:\n";
-    print FILE "http://cfa.cxc.harvard.edu/mta/Snapshot/BUOCC/snap.cgi\n"; #debug
-    #print FILE "http://cfa.cxc.harvard.edu/mta_days/MIRROR/Snapshot/BUOCC/snap.cgi\n"; #debug
-    print FILE "This message sent to malgosia\n"; #debug
-    printf FILE "BUOCC BUOCC BUOCC TEST\n\n";
-    #print FILE "This message sent to brad\n"; #debug
-    #print FILE "This message sent to brad rac swolk\n"; #debug
-    #print FILE "This message sent to brad\n"; #debug
-    #print FILE "\n TEST   TEST   TEST   TEST   TEST   TEST   TEST\n"; #debug
+    print FILE "http://cxc.harvard.edu/cgi-gen/mta/Snap/snap.cgi\n";
+    print FILE "This message sent to malgosia\n";
     close FILE;
 
-    #open MAIL, "|mail brad\@head.cfa.harvard.edu swolk\@head.cfa.harvard.edu rac\@head.cfa.harvard.edu";
-    #open MAIL, "|mail brad\@head.cfa.harvard.edu swolk\@head.cfa.harvard.edu";
-    open MAIL, "|mailx -s 'BRIT ' lpulgarinduque\@cfa.harvard.edu";
-    #open MAIL, "|mailx -s BRIT brad\@head.cfa.harvard.edu";
-    #open MAIL, "|mailx -s BRIT brad\@head.cfa.harvard.edu";
-    #open MAIL, "|mail brad\@head.cfa.harvard.edu";
-    #open MAIL, "|more"; #debug
+    open MAIL, "|mailx -s 'TEST: BRIT ' msobolewska\@cfa.harvard.edu";
     open FILE, $afile;
     while (<FILE>) {
       print MAIL $_;
@@ -1508,6 +1683,7 @@ sub send_cpe_alert {
   if (-s $afile) {
   } else {
     open FILE, ">$afile";
+    print FILE "TEST TEST TEST\n\n";
     print FILE "Chandra realtime telemetry shows AOCPESTL (CPE Status) $_[0] at $obt UT\n\n";
     # try to figure out next comm passes
     open COMS, $comfile;
@@ -1516,11 +1692,8 @@ sub send_cpe_alert {
     my $day = $time[1] + ($time[2]/24) + ($time[3]/1440);
     while (<COMS>) {
       my @line = split(" ", $_);
-      #print FILE "$time[0] $time[1] $time[2] $time[3]\n"; # debug
-      #print FILE "$line[0] $line[4] $line[6] $line[7]\n"; # debug
       if ($line[0] < $time[0]) {next;}
       if ($line[4] < $time[1]) {next;}
-      #if ($line[7] < ("$time[2]"."$time[3]")) {next;}
       if ($line[3] < $day) {next;}
       my @next = split(/\./, $line[1]);
       print FILE "Current pass:  $line[0]:$next[0]:$line[6] to $line[7]\n";
@@ -1538,16 +1711,11 @@ sub send_cpe_alert {
     }
       
     print FILE "\nSnapshot:\n";
-    print FILE "http://cfa.cxc.harvard.edu/mta/Snapshot/BUOCC/snap.cgi\n"; #debug
-    #print FILE "http://cfa.cxc.harvard.edu/mta_days/MIRROR/Snapshot/BUOCC/snap.cgi\n"; #debug
-    print FILE "This message sent to malgosia\n"; #debug
-    printf FILE "BUOCC BUOCC BUOCC TEST\n\n";
-    #print FILE "This message sent to brad\n"; #debug
+    print FILE "http://cxc.harvard.edu/cgi-gen/mta/Snap/snap.cgi\n";
+    print FILE "This message sent to malgosia\n";
     close FILE;
 
-    #open MAIL, "|mailx -s CPEstat brad\@head.cfa.harvard.edu";
-    open MAIL, "|mailx -s 'CPEstat'  lpulgarinduque\@cfa.harvard.edu";
-    #open MAIL, "|more"; #debug
+    open MAIL, "|mailx -s 'TEST: CPEstat' msobolewska\@cfa.harvard.edu";
     open FILE, $afile;
     while (<FILE>) {
       print MAIL $_;
@@ -1563,15 +1731,16 @@ sub send_fmt_alert {
   #if (! time_curr($obstime)) {
     #return;
   #}
-  my $afile = "$work_dir/.fmt5alert";
+  my $afile = ".fmt5alert";
   my $comfile = "/pool14/chandra/DSN.schedule";
   if (-s $afile) {
   } else {
     open FILE, ">$afile";
-    #print FILE "  THIS IS ONLY A TEST !!!! \n\n"; #debug
-    printf FILE "BUOCC BUOCC BUOCC TEST\n\n";
-    print FILE "Chandra realtime telemetry shows FMT$_[0] at $obt UT\n\n";
-    #print FILE "\nTelecon on 1-844-467-6272 111165\# now.\n";
+    print FILE "TEST TEST TEST\n\n";
+    print FILE "Chandra realtime telemetry shows FMT$_[0] at $obt UT\n";
+    print FILE "Check email for info.\n";
+    print FILE "\nTelecon on \#609-829-8540 PIN 132 194 285\# : meet.google.com/fmc-gusj-eos \n";
+    print FILE "A reminder, this may be connected to the voice loops at OCC\n";
     # try to figure out next comm passes
     open COMS, $comfile;
     my @time = split(":", $obt);
@@ -1579,11 +1748,8 @@ sub send_fmt_alert {
     my $day = $time[1] + ($time[2]/24) + ($time[3]/1440);
     while (<COMS>) {
       my @line = split(" ", $_);
-      #print FILE "$time[0] $time[1] $time[2] $time[3]\n"; # debug
-      #print FILE "$line[0] $line[4] $line[6] $line[7]\n"; # debug
       if ($line[0] < $time[0]) {next;}
       if ($line[4] < $time[1]) {next;}
-      #if ($line[7] < ("$time[2]"."$time[3]")) {next;}
       if ($line[3] < $day) {next;}
       my @next = split(/\./, $line[1]);
       print FILE "Current pass:  $line[0]:$next[0]:$line[6] to $line[7]\n";
@@ -1601,17 +1767,11 @@ sub send_fmt_alert {
     }
       
     print FILE "\nSnapshot:\n";
-    print FILE "http://cfa.cxc.harvard.edu/mta/Snapshot/BUOCC/snap.cgi\n"; #debug
-    print FILE "This message sent to malgosia\n"; #debug
-    printf FILE "BUOCC BUOCC BUOCC TEST\n\n";
-    #print FILE "\n TEST   TEST   TEST   TEST   TEST   TEST   TEST\n"; #debug
+    print FILE "http://cxc.harvard.edu/cgi-gen/mta/Snap/snap.cgi\n";
+    print FILE "This message sent to malgosia\n";
     close FILE;
 
-    #open MAIL, "|mail brad\@head.cfa.harvard.edu swolk\@head.cfa.harvard.edu rac\@head.cfa.harvard.edu";
-    #open MAIL, "|mailx -s 'SIM FMT5: telecon 111165\# now' brad\@head.cfa.harvard.edu";
-    open MAIL, "|mailx -s 'FMT5'  lpulgarinduque\@cfa.harvard.edu";
-    #open MAIL, "|mail brad\@head.cfa.harvard.edu";
-    #open MAIL, "|more"; #debug
+    open MAIL, "|mailx -s 'TEST: FMT5' msobolewska\@cfa.harvard.edu";
     open FILE, $afile;
     while (<FILE>) {
       print MAIL $_;
@@ -1632,7 +1792,7 @@ sub send_gyro_alert {
   if (-s $afile) {
   } else {
     open FILE, ">$afile";
-    #print FILE "\n TEST   TEST   TEST   TEST   TEST   TEST   TEST\n"; #debug
+    print FILE "TEST TEST TEST\n\n";
     printf FILE "Chandra realtime telemetry shows AIRU1G1I %6.2f mAmp at %s UT\n\n", $_[0], $obt;
     # try to figure out next comm passes
     open COMS, $comfile;
@@ -1641,11 +1801,8 @@ sub send_gyro_alert {
     my $day = $time[1] + ($time[2]/24) + ($time[3]/1440);
     while (<COMS>) {
       my @line = split(" ", $_);
-      #print FILE "$time[0] $time[1] $time[2] $time[3]\n"; # debug
-      #print FILE "$line[0] $line[4] $line[6] $line[7]\n"; # debug
       if ($line[0] < $time[0]) {next;}
       if ($line[4] < $time[1]) {next;}
-      #if ($line[7] < ("$time[2]"."$time[3]")) {next;}
       if ($line[3] < $day) {next;}
       my @next = split(/\./, $line[1]);
       print FILE "Current pass:  $line[0]:$next[0]:$line[6] to $line[7]\n";
@@ -1663,17 +1820,11 @@ sub send_gyro_alert {
     }
       
     print FILE "\nSnapshot:\n";
-    print FILE "http://cfa.cxc.harvard.edu/mta/Snapshot/BUOCC/snap.cgi\n"; #debug
-    #print FILE "This message sent to brad\n"; #debug
-    #print FILE "This message sent to swolk brad brad1\n"; #debug
-    print FILE "This message sent to malgosia\n"; #debug
-    printf FILE "BUOCC BUOCC BUOCC TEST\n\n";
-    #print FILE "\n TEST   TEST   TEST   TEST   TEST   TEST   TEST\n"; #debug
+    print FILE "http://cxc.harvard.edu/cgi-gen/mta/Snap/snap.cgi\n";
+    print FILE "This message sent to malgosia\n";
     close FILE;
 
-    #open MAIL, "|mailx -s AIRU1G1I brad\@head.cfa.harvard.edu swolk\@head.cfa.harvard.edu 6172573986\@mobile.mycingular.com";
-    open MAIL, "|mailx -s 'AIRU1G1I BUOCC TEST' lpulgarinduque\@cfa.harvard.edu";
-    #open MAIL, "|mailx -s AIRU1G1I brad\@head.cfa.harvard.edu";
+    open MAIL, "|mailx -s 'TEST: AIRU1G1I' msobolewska\@cfa.harvard.edu";
     open FILE, $afile;
     while (<FILE>) {
       print MAIL $_;
@@ -1692,14 +1843,13 @@ sub send_ctxpwr_alert {
   if (-s $afile) {
   } else {
     open FILE, ">$afile";
-    printf FILE "BUOCC BUOCC BUOCC TEST\n\n";
+    print FILE "TEST TEST TEST\n\n";
     print FILE "Chandra realtime telemetry shows Transmitter $_[1] Power = $_[0] DBM at $obt UT\n";
     print FILE "Limit = 36.75 DBM\n\n";
-    print FILE "This message sent to malgosia\n"; #debug
+    print FILE "This message sent to malgosia\n";
     close FILE;
 
-    #open MAIL, "|mailx -s CTXPWR brad\@head.cfa.harvard.edu swolk\@head.cfa.harvard.edu";
-    open MAIL, "|mailx -s 'CTXPWR BUOCC TEST' lpulgarinduque\@cfa.harvard.edu";
+    open MAIL, "|mailx -s 'TEST: CTXPWR' msobolewska\@cfa.harvard.edu";
     open FILE, $afile;
     while (<FILE>) {
       print MAIL $_;
@@ -1718,14 +1868,13 @@ sub send_ctxv_alert {
   if (-s $afile) {
   } else {
     open FILE, ">$afile";
+    print FILE "TEST TEST TEST\n\n";
     print FILE "Chandra realtime telemetry shows Transmitter $_[1] Voltage = $_[0] V at $obt UT\n";
     print FILE "Limit = 3.60 V\n\n";
-    print FILE "This message sent to malgosia\n"; #debug
-    printf FILE "BUOCC BUOCC BUOCC TEST\n\n";
+    print FILE "This message sent to malgosia\n";
     close FILE;
 
-    #open MAIL, "|mailx -s CTXV brad\@head.cfa.harvard.edu swolk\@head.cfa.harvard.edu";
-    open MAIL, "|mailx -s 'CTXV BUOCC TEST'  lpulgarinduque\@cfa.harvard.edu";
+    open MAIL, "|mailx -s 'TEST: CTXV' msobolewska\@cfa.harvard.edu";
     open FILE, $afile;
     while (<FILE>) {
       print MAIL $_;
@@ -1737,7 +1886,6 @@ sub send_ctxv_alert {
 
 sub send_hkp27v_alert {
   my $obstime = ${$hash{"5HSE202"}}[0];
-  #print "send_hkp27v $obstime\n";
   #if (! time_curr($obstime)) {
     #return;
   #}
@@ -1745,14 +1893,13 @@ sub send_hkp27v_alert {
   if (-s $afile) {
   } else {
     open FILE, ">$afile";
-    printf FILE "BUOCC BUOCC BUOCC\n\n";
+    print FILE "TEST TEST TEST\n\n";
     print FILE "Chandra realtime telemetry shows EPHIN HKP27V Voltage = $_[0] V at $obt UT\n";
     print FILE "Limit > 26.0 V\n\n";
-    #print FILE "This message sent to sot_lead,fot,emartin\n"; #debug
+    print FILE "This message sent to malgosia\n";
     close FILE;
 
-    #open MAIL, "|mailx -s HKP27V brad\@head.cfa.harvard.edu";
-    #old_lukeopen MAIL, "|mailx -s 'HKP27V BUOCC' juda\@head.cfa.harvard.edu plucinsk\@head.cfa.harvard.edu aldcroft\@head.cfa.harvard.edu wap\@head.cfa.harvard.edu swolk\@head.cfa.harvard.edu das\@head.cfa.harvard.edu emk\@head.cfa.harvard.edu nadams\@head.cfa.harvard.edu gregg\@head.cfa.harvard.edu fot\@head.cfa.harvard.edu emartin\@head.cfa.harvard.edu 8006724485\@archwireless.net brad\@head.cfa.harvard.edu";
+    open MAIL, "|mailx -s 'TEST: HKP27V' msobolewska\@cfa.harvard.edu";
     open FILE, $afile;
     while (<FILE>) {
       print MAIL $_;
@@ -1764,21 +1911,20 @@ sub send_hkp27v_alert {
 
 sub send_pline03t_alert {
   my $obstime = ${$hash{"PLINE03T"}}[0];
-  if (! time_curr($obstime)) {
-    return;
-  }
+  #if (! time_curr($obstime)) {
+  #  return;
+  #}
   my $afile = ".pline03talert";
   if (-s $afile) {
   } else {
     open FILE, ">$afile";
-    printf FILE "BUOCC BUOCC BUOCC TEST\n\n";
+    print FILE "TEST TEST TEST\n\n";
     print FILE "Chandra realtime telemetry shows  PLINE03T = $_[0] F at $obt UT\n";
     print FILE "Limit > 42.5 V\n\n";
-    print FILE "This message sent to malgosia\n"; #debug
+    print FILE "This message sent to malgosia\n";
     close FILE;
 
-    #open MAIL, "|mailx -s PLINE03T brad\@head.cfa.harvard.edu";
-    open MAIL, "|mailx -s 'PLINE03T BUOCC TEST' lpulgarinduque\@cfa.harvard.edu";
+    open MAIL, "|mailx -s 'TEST: PLINE03T' msobolewska\@cfa.harvard.edu";
     open FILE, $afile;
     while (<FILE>) {
       print MAIL $_;
@@ -1790,21 +1936,20 @@ sub send_pline03t_alert {
 
 sub send_pline04t_alert {
   my $obstime = ${$hash{"PLINE04T"}}[0];
-  if (! time_curr($obstime)) {
-    return;
-  }
+  #if (! time_curr($obstime)) {
+  #  return;
+  #}
   my $afile = ".pline04talert";
   if (-s $afile) {
   } else {
     open FILE, ">$afile";
-    printf FILE "BUOCC BUOCC BUOCC TEST\n\n";
+    print FILE "TEST TEST TEST\n\n";
     print FILE "Chandra realtime telemetry shows  PLINE04T = $_[0] F at $obt UT\n";
     print FILE "Limit > 42.5 V\n\n";
-    print FILE "This message sent to malgosia\n"; #debug
+    print FILE "This message sent to malgosia\n";
     close FILE;
 
-    #open MAIL, "|mailx -s PLINE04T brad\@head.cfa.harvard.edu";
-    open MAIL, "|mailx -s 'PLINE04T BUOCC TEST' lpulgarinduque\@cfa.harvard.edu";
+    open MAIL, "|mailx -s 'TEST: PLINE04T' msobolewska\@cfa.harvard.edu";
     open FILE, $afile;
     while (<FILE>) {
       print MAIL $_;
@@ -1816,21 +1961,20 @@ sub send_pline04t_alert {
 
 sub send_aacccdpt_yellow_alert {
   my $obstime = ${$hash{"AACCCDPT"}}[0];
-  if (! time_curr($obstime)) {
-    return;
-  }
-  my $afile = ".aacccdptalert";
+  #if (! time_curr($obstime)) {
+  #  return;
+  #}
+  my $afile = ".aacccdptyalert";
   if (-s $afile) {
   } else {
     open FILE, ">$afile";
-    printf FILE "BUOCC BUOCC BUOCC TEST\n\n";
-    print FILE "Chandra realtime telemetry shows  AACCCDPT = $_[0] C at $obt UT\n";
-    print FILE "Limit > -21.5 C and < -18.3 C\n\n";
-    print FILE "This message sent to malgosia\n"; #debug
+    print FILE "TEST TEST TEST\n\n";
+    printf FILE "Chandra realtime telemetry shows  AACCCDPT = %6.2f C at $obt UT\n",$_[0];
+    print FILE "Limit > -21.5 C and < -17.0 C\n\n";
+    print FILE "This message sent to malgosia\n";
     close FILE;
 
-    #open MAIL, "|mailx -s AACCCDPT brad\@head.cfa.harvard.edu";
-    open MAIL, "|mailx -s 'AACCCDPT BUOCC TEST' lpulgarinduque\@cfa.harvard.edu";
+    open MAIL, "|mailx -s 'TEST: AACCCDPT' msobolewska\@cfa.harvard.edu";
     open FILE, $afile;
     while (<FILE>) {
       print MAIL $_;
@@ -1842,21 +1986,20 @@ sub send_aacccdpt_yellow_alert {
 
 sub send_aacccdpt_red_alert {
   my $obstime = ${$hash{"AACCCDPT"}}[0];
-  if (! time_curr($obstime)) {
-    return;
-  }
+  #if (! time_curr($obstime)) {
+  #  return;
+  #}
   my $afile = ".aacccdptalert";
   if (-s $afile) {
   } else {
     open FILE, ">$afile";
-    printf FILE "BUOCC BUOCC BUOCC\n\n";
+    print FILE "TEST TEST TEST\n\n";
     print FILE "Chandra realtime telemetry shows  AACCCDPT = $_[0] C at $obt UT\n";
     print FILE "Limit < 0 C\n\n";
-    print FILE "This message sent to brad\n"; #debug
+    print FILE "This message sent to malgosia\n";
     close FILE;
 
-    #open MAIL, "|mailx -s AACCCDPT brad\@head.cfa.harvard.edu,swolk";
-    #old_lukeopen MAIL, "|mailx -s 'AACCCDPT BUOCC' brad\@head.cfa.harvard.edu,aspect_help,6177214364\@vtext.com,8006724485\@archwireless.net";
+    open MAIL, "|mailx -s 'TEST: AACCCDPT' msobolewska\@cfa.harvard.edu";
     open FILE, $afile;
     while (<FILE>) {
       print MAIL $_;
@@ -1868,22 +2011,146 @@ sub send_aacccdpt_red_alert {
 
 sub send_ldrtno_alert {
   my $obstime = ${$hash{"3LDRTNO"}}[0];
-  if (! time_curr($obstime)) {
-    return;
-  }
+  #if (! time_curr($obstime)) {
+  #  return;
+  #}
   my $afile = ".ldrtnoalert";
   if (-s $afile) {
   } else {
     open FILE, ">$afile";
-    printf FILE "BUOCC BUOCC BUOCC\n\n";
+    print FILE "TEST TEST TEST\n\n";
     print FILE "Chandra realtime telemetry shows  3LDRTNO = $_[0] F at $obt UT\n";
-    print FILE "BUOCC Last Detected Reference Tab Number = 0. Possible SEA reset.\n";
+    print FILE "SIM Last Detected Reference Tab Number = 0. Possible SEA reset.\n";
     print FILE "Limit > 0\n\n";
-    print FILE "This message sent to brad\n"; #debug
+    print FILE "This message sent to malgosia\n";
     close FILE;
 
-    #open MAIL, "|mailx -s 3LDRTNO brad\@head.cfa.harvard.edu";
-    #old_lukeopen MAIL, "|mailx -s '3LDRTNO BUOCC' brad\@head.cfa.harvard.edu";
+    open MAIL, "|mailx -s 'TEST: 3LDRTNO' msobolewska\@cfa.harvard.edu";
+    open FILE, $afile;
+    while (<FILE>) {
+      print MAIL $_;
+    }
+    close FILE;
+    close MAIL;
+  }
+}
+
+sub send_n15vbvl_alert {
+  my $obstime = ${$hash{"2N15VBVL"}}[0];
+  #if (! time_curr($obstime)) {
+  #  return;
+  #}
+  my $afile = ".n15vbvlalert";
+  if (-s $afile) {
+  } else {
+    open FILE, ">$afile";
+    print FILE "TEST TEST TEST\n\n";
+    print FILE "Chandra realtime telemetry shows  2N15VBVL = $_[0] V at $obt UT\n";
+    print FILE "Limit < -10 V\n\n";
+    print FILE "This message sent to malgosia\n";
+    close FILE;
+
+    open MAIL, "|mailx -s 'TEST: 2N15VBVL' msobolewska\@cfa.harvard.edu";
+    open FILE, $afile;
+    while (<FILE>) {
+      print MAIL $_;
+    }
+    close FILE;
+    close MAIL;
+  }
+}
+
+sub send_p15vbvl_alert {
+  my $obstime = ${$hash{"2P15VBVL"}}[0];
+  #if (! time_curr($obstime)) {
+  #  return;
+  #}
+  my $afile = ".p15vbvlalert";
+  if (-s $afile) {
+  } else {
+    open FILE, ">$afile";
+    print FILE "TEST TEST TEST\n\n";
+    print FILE "Chandra realtime telemetry shows  2P15VBVL = $_[0] V at $obt UT\n";
+    print FILE "Limit > 10 V\n\n";
+    print FILE "This message sent to malgosia\n";
+    close FILE;
+
+    open MAIL, "|mailx -s 'TEST: 2P15VBVL' msobolewska\@cfa.harvard.edu";
+    open FILE, $afile;
+    while (<FILE>) {
+      print MAIL $_;
+    }
+    close FILE;
+    close MAIL;
+  }
+}
+
+sub send_p05vbvl_alert {
+  my $obstime = ${$hash{"2P05VBVL"}}[0];
+  #if (! time_curr($obstime)) {
+  #  return;
+  #}
+  my $afile = ".p05vbvlalert";
+  if (-s $afile) {
+  } else {
+    open FILE, ">$afile";
+    print FILE "TEST TEST TEST\n\n";
+    print FILE "Chandra realtime telemetry shows  2P05VBVL = $_[0] V at $obt UT\n";
+    print FILE "Limit > 4 V\n\n";
+    print FILE "This message sent to malgosia\n";
+    close FILE;
+
+    open MAIL, "|mailx -s 'TEST: 2P05VBVL' msobolewska\@cfa.harvard.edu";
+    open FILE, $afile;
+    while (<FILE>) {
+      print MAIL $_;
+    }
+    close FILE;
+    close MAIL;
+  }
+}
+
+sub send_p24vbvl_alert {
+  my $obstime = ${$hash{"2P24VBVL"}}[0];
+  #if (! time_curr($obstime)) {
+  #  return;
+  #}
+  my $afile = ".p24vbvlalert";
+  if (-s $afile) {
+  } else {
+    open FILE, ">$afile";
+    print FILE "TEST TEST TEST\n\n";
+    print FILE "Chandra realtime telemetry shows  2P24VBVL = $_[0] V at $obt UT\n";
+    print FILE "Limit > 23 V\n\n";
+    print FILE "This message sent to malgosia\n";
+    close FILE;
+
+    open MAIL, "|mailx -s 'TEST: 2P24VBVL' msobolewska\@cfa.harvard.edu";
+    open FILE, $afile;
+    while (<FILE>) {
+      print MAIL $_;
+    }
+    close FILE;
+    close MAIL;
+  }
+}
+
+sub send_prbscr_alert {
+  my $obstime = ${$hash{"2PRBSCR"}}[0];
+  #if (! time_curr($obstime)) {
+  #  return;
+  #}
+  my $afile = ".prbscralert";
+  if (-s $afile) {
+  } else {
+    open FILE, ">$afile";
+    print FILE "TEST TEST TEST\n\n";
+    print FILE "Chandra realtime telemetry shows  2PRBSCR = $_[0] A at $obt UT\n";
+    print FILE "Limit < 2 A and > -1.3 A\n\n";
+    print FILE "This message sent to malgosia\n";
+    close FILE;
+
+    open MAIL, "|mailx -s 'TEST: 2PRBSCR' msobolewska\@cfa.harvard.edu";
     open FILE, $afile;
     while (<FILE>) {
       print MAIL $_;
