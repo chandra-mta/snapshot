@@ -62,7 +62,7 @@ AOPCADMD	4	pcadmode
 #E1300		4	e1300
 #E150		4	e150
 ###2DETART		4	detart
-2DETBART    4   detbrt
+2DETBRT    4   detbrt
 #P4GM		4	p4gm
 #P41GM		4	p41gm
 CCSDSTMF	4	fmt
@@ -80,4 +80,3 @@ AACCCDPT	4	aacccdpt
 2P05VBVL    4   p05vbvl
 2P24VBVL    4   p24vbvl
 2PRBSCR     4   prbscr
-
