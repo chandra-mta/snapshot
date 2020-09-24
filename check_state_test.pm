@@ -1387,7 +1387,7 @@ sub prbscr {
     if ($tnum == 3) {   # How many cycles?
       send_prbscr_alert($val);
     }
-    if ($tnum <= 10) {
+    if ($tnum <= 3) {
       open (TF, ">$tfile");
       print TF $tnum;
       close TF;
