@@ -1,0 +1,29 @@
+UTC 2020:261:01:27:49 (Sep17)   f_ACE 1.87e+01 F_CRM 1.00e+00 Kp 0.0 R km 118945D
+OBT 2020:260:01:01:07  CTUVCDU  4665727  OBC s/w NRML  FMT2_NORM   CPEstat   NORM
+OBT      716605267.14  ONLVCDU  4665720  OBC Errs   0
+%52 sOBSID      0  EPState   24650
+SIM TTpos   75623  HETG Angle 78.34  PCADMODE NPNT   RA   342.588  Bus V    28.36
+SIM FApos    -467  LETG Angle 76.46  PCONTROL NPNT   Dec   10.923  Bus I    24.69
+                                     AOFSTAR  GUID   Roll 229.999  PRBus I   0.00
+ACA Object FFFSSSSS    Dither  ENAB
+ACA ImFunc TTTTTTTT    Dith Yang   6.21    Yaw Rate     -0.30      HRC-I HV   OFF
+ACA CCD Temp   -9.9    Dith Zang  -6.93    Pitch Rate   -0.41      HRC-S HV   OFF
+ACA Int Time  1.698                        Roll Rate    -0.25      SHLD HV      8
+AOACSTAT         OK    FSS SunBeta NSUN                            EVT RT     255
+                       FSS Alfa  -49.57    Batt 1 SOC  100.00%     SHLD RT      0
+Avg HRMA Temp 71.58    FSS Beta  -49.72    Batt 2 SOC  100.00%
+Avg OBA Temp  62.24    SA Resolv 162.86    Batt 3 SOC  100.00%     -15 V        0
+OBA Tavg Fault NFLT    SA Sun Pres ILLM                            +15 V        0
+OBA Trng Fault NFLT                        +Y SA Amps   12.56      +24 V        0
+HRMA power    31.50    SCS 128  INAC       -Y SA Amps   11.79      +5 V         0
+OBA power      0.00    SCS 129   ACT       +Y SA Temp  112.66
+                       SCS 130   ACT       -Y SA Temp  113.58    ACIS Stat7-0  64
+Roll Mom.     4.381    SCS 131  INAC                             Cold Rad  -120.7
+Pitch Mom.    2.251    SCS 132   ACT       Ephin temp    0.00    Warm Rad   -79.6
+Yaw Mom.    -17.247    SCS 133   ACT       EIO temp      0.00    RadMon      ENAB
+PMTANKP     118.159    SCS 107  INAC       EPH temp    115.28
+                                                                 UpLCmdAcc  18129
+IRU2G1 curr    93.60                       M Unload     MON      Cmd Rej A    238
+IRU2G2 curr   105.60   Roll Bias   0.4201  TSC Move    STOP
+Prop. line 03  85.71   Pitch Bias -2.4650  FA Move     STOP    CTX A PWR    36.38
+Prop. line 04  83.67   Yaw Bias   -1.4968  OTG Move    DISA    CTX A Volts   3.52
