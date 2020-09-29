@@ -13,7 +13,7 @@ $s .= sprintf "OBT %s  CTUVCDU %8d  OBC s/w %s  %s_%-4s   CPEstat   %s\n",
 $s .= sprintf "OBT %17.2f  ONLVCDU %8d  OBC Errs%4d\n",
               ${$h{OBT}}[0], ${$h{OFLVCDCT}}[1], ${$h{COERRCN}}[1];
 
-$s .= sprintf "%52 sOBSID  %5d  EPState   %4s\n",
+$s .= sprintf "%52s OBSID  %5d  EPState   %4s\n",
               " ", ${$h{COBSRQID}}[1], ${$h{EPSTATE}}[1];
 
 $s .= sprintf "SIM TTpos %7d  HETG Angle%6.2f  PCADMODE %s   RA   %7.3f  Bus V   %6.2f\n",
