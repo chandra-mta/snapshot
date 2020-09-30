@@ -346,10 +346,10 @@ $s .= sprintf "%2s<font color=%s>FA Move   %6s</font>",
               " ", ${$h{"3FAMOVE"}}[3], ${$h{"3FAMOVE"}}[1];
 $s .= sprintf "<a href='http://cxc.harvard.edu/mta/DAILY/mta_rt/ctx_plot.html' STYLE='text-decoration: none' target='blank'>";
 if (${$h{CTXAPWR}}[1] > 15) {
-  $s .= sprintf "%3s<font color=%s>CTX A PWR    %7.2f</font></a>\n",
+  $s .= sprintf "%3s<font color=%s>CTX A PWR   %7.2f</font></a>\n",
                 " ", ${$h{CTXAPWR}}[3],${$h{CTXAPWR}}[1];
 } else {
-  $s .= sprintf "%3s<font color=%s>CTX B PWR    %7.2f</font></a>\n",
+  $s .= sprintf "%3s<font color=%s>CTX B PWR   %7.2f</font></a>\n",
                 " ", ${$h{CTXBPWR}}[3],${$h{CTXBPWR}}[1];
 }
                
@@ -362,10 +362,10 @@ $s .= sprintf "%3s<font color=%s>Yaw Bias   %7.4f</font></a>",
 $s .= sprintf "%2s<font color=%s>OTG Move  %6s</font>", 
               " ",${$h{"4OOTGMEF"}}[3], ${$h{"4OOTGMEF"}}[1];
 if (${$h{CTXAV}}[1] > 1) {
-  $s .= sprintf "%3s<font color=%s>CTX A Volts    %5.2f</font>\n",
+  $s .= sprintf "%3s<font color=%s>CTX A Volts   %5.2f</font>\n",
                 " ", ${$h{CTXAV}}[3],${$h{CTXAV}}[1];
 } else {
-  $s .= sprintf "%3s<font color=%s>CTX B Volts    %5.2f</font>\n",
+  $s .= sprintf "%3s<font color=%s>CTX B Volts   %5.2f</font>\n",
                 " ", ${$h{CTXBV}}[3],${$h{CTXBV}}[1];
 }
 
