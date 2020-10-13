@@ -1808,7 +1808,7 @@ sub send_gyro_alert {
       print FILE "               $line[0]:$next[0]:$line[6] to $line[7]\n";
       last;
     }
-      
+
     print FILE "\nSnapshot:\n";
     print FILE "http://cxc.harvard.edu/cgi-gen/mta/Snap/snap.cgi\n";
     print FILE "This message sent to malgosia\n";

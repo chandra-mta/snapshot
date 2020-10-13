@@ -669,7 +669,7 @@ sub ctxapwr {
   $color = $GRN;
   if ($val < $ctxa_pwr_lim) {
     $color = $GRN;
-    my $tnum = 50;  # but, wait a little while before deleting lock
+    my $dnum = 50;  # but, wait a little while before deleting lock
     if (-s $dfile) {
       open (TF, "<$dfile");
       $dnum = <TF>;
@@ -781,7 +781,7 @@ sub ctxav {
     $tnum--;
     if ($tnum == 0) {
       if (-s $afile) {
-      unlink $afile;
+        unlink $afile;
       }
     }
     if ($tnum > 0) {
@@ -828,7 +828,7 @@ sub ctxbv {
     $tnum--;
     if ($tnum == 0) {
       if (-s $afile) {
-      unlink $afile;
+        unlink $afile;
       }
     }
     if ($tnum > 0) {
@@ -993,7 +993,7 @@ sub pline03t {
     if ($tnum == 3) {
       send_pline03t_alert($val);
     }
-    if ($tnum <= 1) {
+    if ($tnum <= 3) {
       open (TF, ">$tfile");
       print TF $tnum;
       close TF;
@@ -1157,7 +1157,7 @@ sub ldrtno {
       print TF $tnum;
       close TF;
     }
-  } #if ($val < 42.5) {
+  } #if ($val <= 0) {
   return $color;
 }
 
@@ -1170,7 +1170,7 @@ sub n15vbvl {
   if ($val < -10) {
     $color = $GRN;
     if (-s $afile) {
-      my $tnum = 3;  # but, wait a little while before deleting lock
+      my $tnum = 10;  # but, wait a little while before deleting lock
       if (-s $tfile) {
         open (TF, "<$tfile");
         $tnum = <TF>;
@@ -1217,7 +1217,7 @@ sub p15vbvl {
   if ($val > 10) {
     $color = $GRN;
     if (-s $afile) {
-      my $tnum = 3;  # but, wait a little while before deleting lock
+      my $tnum = 10;  # but, wait a little while before deleting lock
       if (-s $tfile) {
         open (TF, "<$tfile");
         $tnum = <TF>;
@@ -1264,7 +1264,7 @@ sub p05vbvl {
   if ($val > 4) {
     $color = $GRN;
     if (-s $afile) {
-      my $tnum = 3;  # but, wait a little while before deleting lock
+      my $tnum = 10;  # but, wait a little while before deleting lock
       if (-s $tfile) {
         open (TF, "<$tfile");
         $tnum = <TF>;
@@ -1311,7 +1311,7 @@ sub p24vbvl {
   if ($val > 23) {
     $color = $GRN;
     if (-s $afile) {
-      my $tnum = 3;  # but, wait a little while before deleting lock
+      my $tnum = 10;  # but, wait a little while before deleting lock
       if (-s $tfile) {
         open (TF, "<$tfile");
         $tnum = <TF>;
