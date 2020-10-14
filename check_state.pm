@@ -1289,10 +1289,10 @@ sub send_107_alert {
     close FILE;
 
     #open MAIL, "|mail msobolewska\@cfa.harvard.edu swolk\@cfa.harvard.edu rac\@cfa.harvard.edu";
-    open MAIL, "|mailx -s SCS107_lina lpulgarinduque\@cfa.harvard.edu";
+    #open MAIL, "|mailx -s SCS107_lina lpulgarinduque\@cfa.harvard.edu";
     #open MAIL, "|mail sot_yellow_alert\@cfa.harvard.edu";
     #open MAIL, "|mailx -s SCS107 sot_red_alert\@cfa.harvard.edu";
-    #open MAIL, "|mailx -s 'SCS107 check email now' sot_red_alert\@cfa.harvard.edu operators\@cfa.harvard.edu";
+    open MAIL, "|mailx -s 'SCS107 check email now' sot_red_alert\@cfa.harvard.edu operators\@cfa.harvard.edu";
     #open MAIL, "|mailx -s 'SCS107 telecon 111165\# now' 617257386\@mms.att.net";
     #open MAIL, "|mailx -s SCS107 msobolewska\@cfa.harvard.edu";
     #open MAIL, "|more"; #debug
