@@ -283,7 +283,7 @@ sub e150 {
     return $color;
 }
 
-sub detart {
+sub detbrt {
     my $val = $_[0];
     my $radmon = ${$hash{CORADMEN}}[1];
     if ($radmon eq 'ENAB') {
@@ -924,7 +924,7 @@ sub hkp27v {
   return $color;
 }
 
-sub shldart {
+sub shldbrt {
   my $val = $_[0];
   my $afile = "./.hrc_shld_alert";
   my $tfile = "./.hrcshldwait";
@@ -1289,10 +1289,10 @@ sub send_107_alert {
     close FILE;
 
     #open MAIL, "|mail msobolewska\@cfa.harvard.edu swolk\@cfa.harvard.edu rac\@cfa.harvard.edu";
-    open MAIL, "|mailx -s SCS107_lina lpulgarinduque\@cfa.harvard.edu";
+    #open MAIL, "|mailx -s SCS107_lina lpulgarinduque\@cfa.harvard.edu";
     #open MAIL, "|mail sot_yellow_alert\@cfa.harvard.edu";
     #open MAIL, "|mailx -s SCS107 sot_red_alert\@cfa.harvard.edu";
-    #open MAIL, "|mailx -s 'SCS107 check email now' sot_red_alert\@cfa.harvard.edu operators\@cfa.harvard.edu";
+    open MAIL, "|mailx -s 'SCS107 check email now' sot_red_alert\@cfa.harvard.edu operators\@cfa.harvard.edu";
     #open MAIL, "|mailx -s 'SCS107 telecon 111165\# now' 617257386\@mms.att.net";
     #open MAIL, "|mailx -s SCS107 msobolewska\@cfa.harvard.edu";
     #open MAIL, "|more"; #debug
@@ -1398,7 +1398,7 @@ sub send_sim_unsafe_alert {
 }
 
 sub send_hrc_shld_alert {
-  my $obstime = ${$hash{"2SHLDART"}}[0];
+  my $obstime = ${$hash{"2SHLDBRT"}}[0];
   if (! time_curr($obstime)) {
     return;
   }

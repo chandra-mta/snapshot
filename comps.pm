@@ -1,6 +1,8 @@
 # computations for chandra snapshot
 # BDS May 2001
 
+use POSIX;
+
 sub time_now {
   use Time::TST_Local;
   my $t1998 = 883612800.0;
@@ -131,7 +133,11 @@ sub do_comps {
   $h{AOACINTT}[1] = ${$h{AOACINTT}}[1]/1000;
 
   # if shld hv is off, make rate 0, acorn comes out NaN
-  if (${$h{"2S2HVST"}}[1] == 0) { ${$h{"2SHLDART"}}[1]=0; }
+  if (${$h{"2S2HVST"}}[1] == 0) { ${$h{"2SHLDBRT"}}[1]=0; }
+
+  # Convert to high order byte rates
+  ${$h{"2SHLDBRT"}}[1] = int(${$h{"2SHLDBRT"}}[1] / 256);
+  ${$h{"2DETBRT"}}[1] = floor(log(${$h{"2DETBRT"}}[1] + 1) / log(2));
 
   $utc = `date -u +"%Y:%j:%T (%b%e)"`;
   chomp $utc;

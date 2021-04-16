@@ -33,10 +33,10 @@ $s .= sprintf "ACA CCD Temp %6.1f    Dith Zang %6.2f    Pitch Rate %7.2f      SH
 ${$h{AACCCDPT}}[1],${$h{AODITHR2}}[1],${$h{AORATE2}}[1],${$h{"2S2HVST"}}[1];
 
 $s .= sprintf "ACA Int Time %6.3f                        Roll Rate  %7.2f      EVT RT  %4d\n",
-    ${$h{AOACINTT}}[1],${$h{AORATE1}}[1],${$h{"2DETART"}}[1];
+    ${$h{AOACINTT}}[1],${$h{AORATE1}}[1],${$h{"2DETBRT"}}[1];
 
 $s .= sprintf "AOACSTAT       %4s    FSS SunBeta %4s                            SHLD RT %4d\n",
-    ${$h{AOACSTAT}}[1],${$h{AOBETSUN}}[1],${$h{"2SHLDART"}}[1];
+    ${$h{AOACSTAT}}[1],${$h{AOBETSUN}}[1],${$h{"2SHLDBRT"}}[1];
 
 $s .= sprintf "                       FSS Alfa  %6.2f    Batt 1 SOC %7.2f%%\n",
     ${$h{AOALPANG}}[1],${$h{SOCB1}}[1];
@@ -245,14 +245,14 @@ $s .= sprintf "<font color=%s>ACA Int Time %6.3f                        </font>"
 $s .= sprintf "<font color=%s>Roll Rate  %7.2f      </font>",
                ${$h{AORATE1}}[3], ${$h{AORATE1}}[1];
 $s .= sprintf "<font color=%s>EVT RT  %4d</font>\n",
-               ${$h{"2DETART"}}[3], ${$h{"2DETART"}}[1];
+               ${$h{"2DETBRT"}}[3], ${$h{"2DETBRT"}}[1];
 
 $s .= sprintf "<font color=%s>AOACSTAT       %4s    </font>",
                ${$h{AOACSTAT}}[3], ${$h{AOACSTAT}}[1];
 $s .= sprintf "<font color=%s>FSS SunBeta %4s                            </font>",
                ${$h{AOBETSUN}}[3], ${$h{AOBETSUN}}[1];
 $s .= sprintf "<font color=%s>SHLD RT %4d</font>\n",
-               ${$h{"2SHLDART"}}[3], ${$h{"2SHLDART"}}[1];
+               ${$h{"2SHLDBRT"}}[3], ${$h{"2SHLDBRT"}}[1];
 
 $s .= sprintf "                       ";
 $s .= sprintf "<font color=%s>FSS Alfa  %6.2f    </font>",
@@ -565,8 +565,8 @@ printf S "HRC-I HV %3s<br/>\n", ${$h{"2IMONST"}}[1];
 printf S "HRC-S HV %3s<br/>\n", ${$h{"2SPONST"}}[1];
 printf S "OBSMode %4s<br/>\n", ${$h{"2OBNLASL"}}[1];
 printf S "SHLD HV %4.1f<br/>\n", ${$h{"2S2HVST"}}[1];
-printf S "EVT RT  %4d<br/>\n", ${$h{"2DETART"}}[1];
-printf S "SHLD RT %4d<br/>\n", ${$h{"2SHLDART"}}[1];
+printf S "EVT RT  %4d<br/>\n", ${$h{"2DETBRT"}}[1];
+printf S "SHLD RT %4d<br/>\n", ${$h{"2SHLDBRT"}}[1];
 printf S "<a href=\'snap2.wml'>Index</a><br/>\n";
 printf S "<a href=\'snap_curr.wml'>Current</a><br/>\n";
 printf S "</p></card>\n";
@@ -724,8 +724,8 @@ printf S "HRC-I HV %3s \*%1s\n", ${$h{"2IMONST"}}[1], ${$h{"2IMONST"}}[2];
 printf S "HRC-S HV %3s \*%1s\n", ${$h{"2SPONST"}}[1], ${$h{"2SPONST"}}[2];
 printf S "OBSMode %4s \*%1s\n", ${$h{"2OBNLASL"}}[1], ${$h{"2OBNLASL"}}[2];
 printf S "SHLD HV %4.1f \*%1s\n", ${$h{"2S2HVST"}}[1], ${$h{"2S2HVST"}}[2];
-printf S "EVT RT  %4d \*%1s\n", ${$h{"2DETART"}}[1], ${$h{"2DETART"}}[2];
-printf S "SHLD RT %4d \*%1s\n", ${$h{"2SHLDART"}}[1], ${$h{"2SHLDART"}}[2];
+printf S "EVT RT  %4d \*%1s\n", ${$h{"2DETBRT"}}[1], ${$h{"2DETBRT"}}[2];
+printf S "SHLD RT %4d \*%1s\n", ${$h{"2SHLDBRT"}}[1], ${$h{"2SHLDBRT"}}[2];
 close S;
 
 open (S, ">>$wapdir/spcad.$date");
