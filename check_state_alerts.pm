@@ -283,7 +283,7 @@ sub e150 {
     return $color;
 }
 
-sub detart {
+sub detbrt {
     my $val = $_[0];
     my $radmon = ${$hash{CORADMEN}}[1];
     if ($radmon eq 'ENAB') {
@@ -924,7 +924,7 @@ sub hkp27v {
   return $color;
 }
 
-sub shldart {
+sub shldbrt {
   my $val = $_[0];
   my $afile = "/home/mta/Snap/.hrc_shld_alert";
   my $tfile = "/home/mta/Snap/.hrcshldwait";
@@ -1396,7 +1396,7 @@ sub send_sim_unsafe_alert {
 }
 
 sub send_hrc_shld_alert {
-  my $obstime = ${$hash{"2SHLDART"}}[0];
+  my $obstime = ${$hash{"2SHLDBRT"}}[0];
   if (! time_curr($obstime)) {
     return;
   }
