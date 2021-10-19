@@ -961,7 +961,7 @@ sub shldbrt {
     }
     $tnum++;
     if ($tnum == 3) {
-      send_hrc_shld_alert($val);
+      #send_hrc_shld_alert($val);
     }
     if ($tnum <= 3) {
       open (TF, ">$tfile");
