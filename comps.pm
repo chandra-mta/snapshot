@@ -1,6 +1,8 @@
 # computations for chandra snapshot
 # BDS May 2001
 
+use POSIX;
+
 sub time_now {
   use Time::TST_Local;
   my $t1998 = 883612800.0;
@@ -131,7 +133,24 @@ sub do_comps {
   $h{AOACINTT}[1] = ${$h{AOACINTT}}[1]/1000;
 
   # if shld hv is off, make rate 0, acorn comes out NaN
-  if (${$h{"2S2HVST"}}[1] == 0) { ${$h{"2SHLDART"}}[1]=0; }
+  if (${$h{"2S2HVST"}}[1] == 0) { ${$h{"2SHLDBRT"}}[1]=0; }
+
+  # The raw HRC anticoincidence shield rate data, telemetered
+  # as MSID 2SHLDBRT for the HRC B-side CEA, corresponds to
+  # the upper byte on the number of counts per second observed;
+  # it reaches a ceiling at a value of 248, where either a
+  # digital-to-analog or analog-to-digital converter limits
+  # the maximum value to below the possible maximum of 255.
+  # Similarly, the MCP total rate, telemetered as MSID 2DETBRT
+  # for the HRC B-side CEA, only reflects the high-order byte
+  # of the rate. It is only valid when HRC MCP HV is raised
+  # to its operating level. The transformation below translates
+  # 2SHLDBRT back to the high-order byte. See also:
+  # https://cxc.harvard.edu/contrib/juda/memos/FN443_HRC_in_RADMON.pdf
+  # https://cxc.harvard.edu/contrib/juda/memos/radmon/mcp_total_rate_threshold.html
+  # https://github.com/chandra-mta/mtanb/blob/g16-hrc-proxy/g16-hrc-proxy/norm_2detart_2shldart.ipynb
+  ${$h{"2SHLDBRT"}}[1] = int(${$h{"2SHLDBRT"}}[1] / 256);
+  ${$h{"2DETBRT"}}[1] = floor(log(${$h{"2DETBRT"}}[1] + 1) / log(2));
 
   $utc = `date -u +"%Y:%j:%T (%b%e)"`;
   chomp $utc;
