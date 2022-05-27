@@ -41,17 +41,17 @@ $s .= sprintf "AOACSTAT       %4s    FSS SunBeta %4s                            
 $s .= sprintf "                       FSS Alfa  %6.2f    Batt 1 SOC %7.2f%%\n",
     ${$h{AOALPANG}}[1],${$h{SOCB1}}[1];
 
-$s .= sprintf "Avg HRMA Temp%6.2f    FSS Beta  %6.2f    Batt 2 SOC %7.2f%%  ACIS Stat7-0 %s\n",
-    ${$h{"4OAVHRMT"}}[1],${$h{AOBETANG}}[1],${$h{SOCB2}}[1], ${$h{ACISTAT}}[1];
+$s .= sprintf "Avg HRMA Temp%6.2f    FSS Beta  %6.2f    Batt 2 SOC %7.2f%%   A -15 V %6.2f\n",
+    ${$h{"4OAVHRMT"}}[1],${$h{AOBETANG}}[1],${$h{SOCB2}}[1], ${$h{"2N15VAVL"}}[1];
 
-$s .= sprintf "Avg OBA Temp %6.2f    SA Resolv %6.2f    Batt 3 SOC %7.2f%%  Cold Rad %6.1f\n",
-    ${$h{"4OAVOBAT"}}[1],${$h{AOSARES1}}[1], ${$h{SOCB3}}[1], ${$h{"1CRAT"}}[1];
+$s .= sprintf "Avg OBA Temp %6.2f    SA Resolv %6.2f    Batt 3 SOC %7.2f%%   A +15 V %6.2f\n",
+    ${$h{"4OAVOBAT"}}[1],${$h{AOSARES1}}[1], ${$h{SOCB3}}[1], ${$h{"2P15VAVL"}}[1];
 
-$s .= sprintf "OBA Tavg Fault %s    SA Sun Pres %4s                         Warm Rad %6.1f\n",
-    ${$h{"4OBAVTMF"}}[1], ${$h{AOSAILLM}}[1], ${$h{"1WRAT"}}[1];
+$s .= sprintf "OBA Tavg Fault %s    SA Sun Pres %4s %24s A  +5 V %6.2f\n",
+    ${$h{"4OBAVTMF"}}[1], ${$h{AOSAILLM}}[1], "", ${$h{"2P05VAVL"}}[1];
 
-$s .= sprintf "OBA Trng Fault %s                        +Y SA Amps %7.2f   RadMon     %4s\n",
-    ${$h{"4OBTOORF"}}[1], ${$h{ESAPYI}}[1], ${$h{CORADMEN}}[1];
+$s .= sprintf "OBA Trng Fault %s                        +Y SA Amps %7.2f    A +24 V %6.2f\n",
+    ${$h{"4OBTOORF"}}[1], ${$h{ESAPYI}}[1], ${$h{"2P05VAVL"}}[1];
 
 $s .= sprintf "HRMA power  %7.2f    SCS 128  %4s       -Y SA Amps %7.2f\n",
     ${$h{OHRMAPWR}}[1], ${$h{COSCS128S}}[1], ${$h{ESAMYI}}[1]; #removed EPHIN Geom 9/24
@@ -59,21 +59,21 @@ $s .= sprintf "HRMA power  %7.2f    SCS 128  %4s       -Y SA Amps %7.2f\n",
 $s .= sprintf "OBA power   %7.2f    SCS 129  %4s       +Y SA Temp %7.2f\n",
     ${$h{OOBAPWR}}[1], ${$h{COSCS129S}}[1], ${$h{TSAPYT}}[1];#removed E150
 
-$s .= sprintf "                       SCS 130  %4s       -Y SA Temp %7.2f\n",
-    ${$h{COSCS130S}}[1], ${$h{TSAMYT}}[1];#removed E300
+$s .= sprintf "                       SCS 130  %4s       -Y SA Temp %7.2f   ACIS Stat7-0 %s\n",
+    ${$h{COSCS130S}}[1], ${$h{TSAMYT}}[1], ${$h{ACISTAT}}[1];#removed E300
 
 #$s .= sprintf "Roll Mom.  %8.3f                                             E1300%10.1f\n",
     #${$h{AOSYMOM1}}[1], $eph{E1300};
-$s .= sprintf "Roll Mom.  %8.3f    SCS 131  %4s\n",
-    ${$h{AOSYMOM1}}[1], ${$h{COSCS131S}}[1]; #removed E1300
+$s .= sprintf "Roll Mom.  %8.3f    SCS 131  %4s %26s Cold Rad %6.1f\n",
+    ${$h{AOSYMOM1}}[1], ${$h{COSCS131S}}[1], "", ${$h{"1CRAT"}}[1]; #removed E1300
 
-$s .= sprintf "Pitch Mom. %8.3f    SCS 132  %4s       Ephin temp %7.2f   UpLCmdAcc%6d\n",
-    ${$h{AOSYMOM2}}[1], ${$h{COSCS132S}}[1], ${$h{"5EPHINT"}}[1], ${$h{CULACC}}[1]; #removed EPH A-Leak
+$s .= sprintf "Pitch Mom. %8.3f    SCS 132  %4s       Ephin temp %7.2f   Warm Rad %6.1f\n",
+    ${$h{AOSYMOM2}}[1], ${$h{COSCS132S}}[1], ${$h{"5EPHINT"}}[1], ${$h{"1WRAT"}}[1]; #removed EPH A-Leak
 
-$s .= sprintf "Yaw Mom.   %8.3f    SCS 133  %4s       EIO temp %9.2f   Cmd Rej A%6d\n",
-    ${$h{AOSYMOM3}}[1], ${$h{COSCS133S}}[1], ${$h{"5EIOT"}}[1], ${$h{CMRJCNTA}}[1];
+$s .= sprintf "Yaw Mom.   %8.3f    SCS 133  %4s       EIO temp %9.2f   RadMon     %4s\n",
+    ${$h{AOSYMOM3}}[1], ${$h{COSCS133S}}[1], ${$h{"5EIOT"}}[1], ${$h{CORADMEN}}[1];
 
-$s .= sprintf "PMTANKP    %8.3f    SCS 107  %4s       EPH temp %9.2f\n", ${$h{PMTANKP}}[1],${$h{COSCS107S}}[1],${$h{TEPHIN}}[1];
+$s .= sprintf "PMTANKP    %8.3f    SCS 107  %4s       EPH temp %9.2f   \n", ${$h{PMTANKP}}[1],${$h{COSCS107S}}[1],${$h{TEPHIN}}[1];
 
 #$s .= sprintf "Gyro 2 Curr 1 %6.2f                  ", ${$h{AIRU2G1I}}[1];
 ##$s .= sprintf "\nGyro 1 Curr 1 %6.2f  Roll Bias   %7.4f  EPH 27I %9.2f", ${$h{AIRU1G1I}}[1], ${$h{AOGBIAS1}}[1]*206264.98, ${$h{"5HSE202"}}[1];
@@ -95,7 +95,8 @@ $s .= sprintf "PMTANKP    %8.3f    SCS 107  %4s       EPH temp %9.2f\n", ${$h{PM
 #$s .= sprintf "Prop. line 04 %6.2f  Yaw Bias   %7.4f", ${$h{PLINE04T}}[1], ${$h{AOGBIAS3}}[1]*206264.98;
 #$s .= sprintf "%23s OTG Move %6s\n", " ",${$h{"4OOTGMEF"}}[1];
 
-$s .= sprintf "IRU2G1 curr %8.2f                                         ",
+$s .= sprintf "%63s UpLCmdAcc%6d\n", "", ${$h{CULACC}}[1];
+$s .= sprintf "IRU2G1 curr %8.2f %22s",
                ${$h{AIRU2G1I}}[1];
 #if ((${$h{"5EHSE106"}}[1]) % 2 == 1) {
 #  $s .= sprintf "%18s  EPH 27V  %9.2f",
@@ -104,25 +105,23 @@ $s .= sprintf "IRU2G1 curr %8.2f                                         ",
 #  $s .= sprintf "%18s  EPH 27I  %9.2f",
 #                 " ",${$h{"5HSE202"}}[1]*20.1/31.05;
 #} # if ((${$h{"5EHSE106"}}[3]+1) % 2 == 0) {
-$s .= sprintf "%3sM Unload %6s\n",
-               " ", ${$h{AOUNLOAD}}[1];
+$s .= sprintf "M Unload %9s   Cmd Rej A%6d\n", ${$h{AOUNLOAD}}[1], ${$h{CMRJCNTA}}[1];
 $s .= sprintf "IRU2G2 curr %8.2f   ",
                ${$h{AIRU2G2I}}[1];
-$s .= sprintf "Roll Bias  %7.4f",
+$s .= sprintf "Roll Bias  %7.4f  ",
                ${$h{AOGBIAS1}}[1]*206264.98;
-$s .= sprintf "%23sTSC Move %6s\n",
-               " ", ${$h{"3TSCMOVE"}}[1];
+$s .= sprintf "TSC Move %9s\n", ${$h{"3TSCMOVE"}}[1];
 $s .= sprintf "Prop. line 03 %6.2f   ",
                ${$h{PLINE03T}}[1];
-$s .= sprintf "Pitch Bias %7.4f",
+$s .= sprintf "Pitch Bias %7.4f  ",
                ${$h{AOGBIAS2}}[1]*206264.98;
-if (${$h{CTXAPWR}}[1] > 15) {
-  $s .= sprintf "  CTX A PWR  %7.2f", ${$h{CTXAPWR}}[1];
-} else {
-  $s .= sprintf "  CTX B PWR  %7.2f", ${$h{CTXBPWR}}[1];
-}
-$s .= sprintf "   FA Move  %6s\n",
+$s .= sprintf "FA Move  %9s   ",
                ${$h{"3FAMOVE"}}[1];
+if (${$h{CTXAPWR}}[1] > 15) {
+  $s .= sprintf "CTX A PWR %5.2f\n", ${$h{CTXAPWR}}[1];
+} else {
+  $s .= sprintf "CTX B PWR %5.2f\n", ${$h{CTXBPWR}}[1];
+}
 $s .= sprintf "Prop. line 04 %6.2f",
                ${$h{PLINE04T}}[1];
 $s .= sprintf "%3sYaw Bias   %7.4f",
