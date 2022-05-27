@@ -105,34 +105,34 @@ $s .= sprintf "IRU2G1 curr %8.2f %22s",
 #  $s .= sprintf "%18s  EPH 27I  %9.2f",
 #                 " ",${$h{"5HSE202"}}[1]*20.1/31.05;
 #} # if ((${$h{"5EHSE106"}}[3]+1) % 2 == 0) {
-$s .= sprintf "M Unload %9s   Cmd Rej A%6d\n", ${$h{AOUNLOAD}}[1], ${$h{CMRJCNTA}}[1];
+$s .= sprintf "M Unload %7s     Cmd Rej A%6d\n", ${$h{AOUNLOAD}}[1], ${$h{CMRJCNTA}}[1];
 $s .= sprintf "IRU2G2 curr %8.2f   ",
                ${$h{AIRU2G2I}}[1];
 $s .= sprintf "Roll Bias  %7.4f  ",
                ${$h{AOGBIAS1}}[1]*206264.98;
-$s .= sprintf "TSC Move %9s\n", ${$h{"3TSCMOVE"}}[1];
+$s .= sprintf "TSC Move %7s\n", ${$h{"3TSCMOVE"}}[1];
 $s .= sprintf "Prop. line 03 %6.2f   ",
                ${$h{PLINE03T}}[1];
 $s .= sprintf "Pitch Bias %7.4f  ",
                ${$h{AOGBIAS2}}[1]*206264.98;
-$s .= sprintf "FA Move  %9s   ",
+$s .= sprintf "FA Move  %7s   ",
                ${$h{"3FAMOVE"}}[1];
 if (${$h{CTXAPWR}}[1] > 15) {
-  $s .= sprintf "CTX A PWR %5.2f\n", ${$h{CTXAPWR}}[1];
+  $s .= sprintf "CTX A PWR   %5.2f\n", ${$h{CTXAPWR}}[1];
 } else {
-  $s .= sprintf "CTX B PWR %5.2f\n", ${$h{CTXBPWR}}[1];
+  $s .= sprintf "CTX B PWR   %5.2f\n", ${$h{CTXBPWR}}[1];
 }
 $s .= sprintf "Prop. line 04 %6.2f",
                ${$h{PLINE04T}}[1];
 $s .= sprintf "%3sYaw Bias   %7.4f",
                " ", ${$h{AOGBIAS3}}[1]*206264.98;
-if (${$h{CTXAV}}[1] > 1) {
-  $s .= sprintf "  CTX A Volts  %5.2f", ${$h{CTXAV}}[1];
-} else {
-  $s .= sprintf "  CTX B Volts  %5.2f", ${$h{CTXBV}}[1];
-}
-$s .= sprintf "%3sOTG Move %6s\n",
+$s .= sprintf "%2sOTG Move %7s",
                " ",${$h{"4OOTGMEF"}}[1];
+if (${$h{CTXAV}}[1] > 1) {
+  $s .= sprintf "   CTX A Volts %5.2f\n", ${$h{CTXAV}}[1];
+} else {
+  $s .= sprintf "   CTX B Volts %5.2f\n", ${$h{CTXBV}}[1];
+}
 
 return $s;
 
