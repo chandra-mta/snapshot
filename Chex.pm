@@ -10,7 +10,8 @@ package Chex;
 
 use RDB;
 use English;
-use POSIX qw(tmpnam);
+#use POSIX qw(tmpnam);
+use File::Temp qw(tempfile);
 #use lib '/proj/sot/ska/lib/site_perl';
 #use Ska::Convert qw(date2time time2date);
 use Convert qw(date2time time2date);
@@ -357,7 +358,7 @@ sub update {
 
 
 # Output complete history of Chandra Expected state
-    $tmp_out_file = tmpnam(); 
+    $tmp_out_file = (tempfile())[1];
     $out_rdb = new RDB;
     $out_rdb->open($tmp_out_file, ">") or die "Couldn't open $tmp_out_file\n";
     $out_rdb->init( map {$state_var[$_] => $state_format[$_]} (0..$#state_var) );
