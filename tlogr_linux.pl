@@ -7,6 +7,11 @@
 #  to force update, even on old data, use -f option.
 #print "Run tlogr\n";
 #exit;
+
+use Cwd qw( abs_path );
+use File::Basename qw( dirname );
+use lib dirname(abs_path($0)); # updates @INC with path to executable
+
 use snap;
 
 # produce a Chandra status snapshot
