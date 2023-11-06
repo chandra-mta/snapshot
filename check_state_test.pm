@@ -1292,7 +1292,8 @@ sub send_107_alert {
     #open MAIL, "|mail brad\@head.cfa.harvard.edu swolk\@head.cfa.harvard.edu";
     #open MAIL, "|mail brad\@head.cfa.harvard.edu";
     #open MAIL, "|mailx -s SCS107 brad\@head.cfa.harvard.edu";
-    open MAIL, "|mailx -s 'SCS107 TEST'  lpulgarinduque\@cfa.harvard.edu";
+    #open MAIL, "|mailx -s 'SCS107 TEST'  lpulgarinduque\@cfa.harvard.edu";
+    open MAIL, "|mailx -s 'SCS107 TEST'  mtadude\@cfa.harvard.edu";
     #open MAIL, "|mailx -s SCS107 brad\@head.cfa.harvard.edu";
     #open MAIL, "|more"; #debug
     open FILE, $afile;
@@ -1354,7 +1355,8 @@ sub send_nsun_alert {
 
     #open MAIL, "|mailx -s NSUN brad\@head.cfa.harvard.edu swolk\@head.cfa.harvard.edu";
     #open MAIL, "|mailx -s NSUN brad\@head.cfa.harvard.edu";
-    open MAIL, "|mailx -s 'NSUN TEST' lpulgarinduque\@cfa.harvard.edu";
+    #open MAIL, "|mailx -s 'NSUN TEST' lpulgarinduque\@cfa.harvard.edu";
+    open MAIL, "|mailx -s 'NSUN TEST' mtadude\@cfa.harvard.edu";
     #open MAIL, "|mailx -s NSUN brad\@head.cfa.harvard.edu operators\@head.cfa.harvard.edu";
     #open MAIL, "|more"; #debug
     open FILE, $afile;
@@ -1384,7 +1386,8 @@ sub send_sim_unsafe_alert {
     print FILE "This message sent to malgosia\n"; #debug
     close FILE;
 
-    open MAIL, "|mailx -s 'UNSAFE! BUOCC ' lpulgarinduque\@cfa.harvard.edu";
+    #open MAIL, "|mailx -s 'UNSAFE! BUOCC ' lpulgarinduque\@cfa.harvard.edu";
+    open MAIL, "|mailx -s 'UNSAFE! BUOCC ' mtadude\@cfa.harvard.edu";
     #open MAIL, "|mailx -s SIM_UNSAFE! brad\@head.cfa.harvard.edu";
     open FILE, $afile;
     while (<FILE>) {
@@ -1415,7 +1418,8 @@ sub send_hrc_shld_alert {
     #open MAIL, "|mailx -s 'HRC SHIELD' brad\@head.cfa.harvard.edu";
     #open MAIL, "|mailx -s 'HRC SHIELD' brad\@head.cfa.harvard.edu swolk\@head.cfa.harvard.edu";
     #open MAIL, "|mailx -s 'HRC SHIELD' sot_lead\@head.cfa.harvard.edu brad\@head.cfa.harvard.edu";
-    open MAIL, "|mailx -s 'HRC SHIELD TEST' lpulgarinduque\@cfa.harvard.edu";
+    #open MAIL, "|mailx -s 'HRC SHIELD TEST' lpulgarinduque\@cfa.harvard.edu";
+    open MAIL, "|mailx -s 'HRC SHIELD TEST' mtadude\@cfa.harvard.edu";
     open FILE, $afile;
     while (<FILE>) {
       print MAIL $_;
@@ -1482,7 +1486,8 @@ sub send_brit_alert {
 
     #open MAIL, "|mail brad\@head.cfa.harvard.edu swolk\@head.cfa.harvard.edu rac\@head.cfa.harvard.edu";
     #open MAIL, "|mail brad\@head.cfa.harvard.edu swolk\@head.cfa.harvard.edu";
-    open MAIL, "|mailx -s 'BRIT ' lpulgarinduque\@cfa.harvard.edu";
+    #open MAIL, "|mailx -s 'BRIT ' lpulgarinduque\@cfa.harvard.edu";
+    open MAIL, "|mailx -s 'BRIT ' mtadude\@cfa.harvard.edu";
     #open MAIL, "|mailx -s BRIT brad\@head.cfa.harvard.edu";
     #open MAIL, "|mailx -s BRIT brad\@head.cfa.harvard.edu";
     #open MAIL, "|mail brad\@head.cfa.harvard.edu";
@@ -1546,7 +1551,8 @@ sub send_cpe_alert {
     close FILE;
 
     #open MAIL, "|mailx -s CPEstat brad\@head.cfa.harvard.edu";
-    open MAIL, "|mailx -s 'CPEstat'  lpulgarinduque\@cfa.harvard.edu";
+    #open MAIL, "|mailx -s 'CPEstat'  lpulgarinduque\@cfa.harvard.edu";
+    open MAIL, "|mailx -s 'CPEstat'  mtadude\@cfa.harvard.edu";
     #open MAIL, "|more"; #debug
     open FILE, $afile;
     while (<FILE>) {
@@ -1609,7 +1615,8 @@ sub send_fmt_alert {
 
     #open MAIL, "|mail brad\@head.cfa.harvard.edu swolk\@head.cfa.harvard.edu rac\@head.cfa.harvard.edu";
     #open MAIL, "|mailx -s 'SIM FMT5: telecon 111165\# now' brad\@head.cfa.harvard.edu";
-    open MAIL, "|mailx -s 'FMT5'  lpulgarinduque\@cfa.harvard.edu";
+    #open MAIL, "|mailx -s 'FMT5'  lpulgarinduque\@cfa.harvard.edu";
+    open MAIL, "|mailx -s 'FMT5'  mtadude\@cfa.harvard.edu";
     #open MAIL, "|mail brad\@head.cfa.harvard.edu";
     #open MAIL, "|more"; #debug
     open FILE, $afile;
@@ -1672,7 +1679,8 @@ sub send_gyro_alert {
     close FILE;
 
     #open MAIL, "|mailx -s AIRU1G1I brad\@head.cfa.harvard.edu swolk\@head.cfa.harvard.edu 6172573986\@mobile.mycingular.com";
-    open MAIL, "|mailx -s 'AIRU1G1I BUOCC TEST' lpulgarinduque\@cfa.harvard.edu";
+    #open MAIL, "|mailx -s 'AIRU1G1I BUOCC TEST' lpulgarinduque\@cfa.harvard.edu";
+    open MAIL, "|mailx -s 'AIRU1G1I BUOCC TEST' mtadude\@cfa.harvard.edu";
     #open MAIL, "|mailx -s AIRU1G1I brad\@head.cfa.harvard.edu";
     open FILE, $afile;
     while (<FILE>) {
@@ -1699,7 +1707,8 @@ sub send_ctxpwr_alert {
     close FILE;
 
     #open MAIL, "|mailx -s CTXPWR brad\@head.cfa.harvard.edu swolk\@head.cfa.harvard.edu";
-    open MAIL, "|mailx -s 'CTXPWR BUOCC TEST' lpulgarinduque\@cfa.harvard.edu";
+    #open MAIL, "|mailx -s 'CTXPWR BUOCC TEST' lpulgarinduque\@cfa.harvard.edu";
+    open MAIL, "|mailx -s 'CTXPWR BUOCC TEST' mtadude\@cfa.harvard.edu";
     open FILE, $afile;
     while (<FILE>) {
       print MAIL $_;
@@ -1725,7 +1734,8 @@ sub send_ctxv_alert {
     close FILE;
 
     #open MAIL, "|mailx -s CTXV brad\@head.cfa.harvard.edu swolk\@head.cfa.harvard.edu";
-    open MAIL, "|mailx -s 'CTXV BUOCC TEST'  lpulgarinduque\@cfa.harvard.edu";
+    #open MAIL, "|mailx -s 'CTXV BUOCC TEST'  lpulgarinduque\@cfa.harvard.edu";
+    open MAIL, "|mailx -s 'CTXV BUOCC TEST'  mtadude\@cfa.harvard.edu";
     open FILE, $afile;
     while (<FILE>) {
       print MAIL $_;
@@ -1778,7 +1788,8 @@ sub send_pline03t_alert {
     close FILE;
 
     #open MAIL, "|mailx -s PLINE03T brad\@head.cfa.harvard.edu";
-    open MAIL, "|mailx -s 'PLINE03T BUOCC TEST' lpulgarinduque\@cfa.harvard.edu";
+    #open MAIL, "|mailx -s 'PLINE03T BUOCC TEST' lpulgarinduque\@cfa.harvard.edu";
+    open MAIL, "|mailx -s 'PLINE03T BUOCC TEST' mtadude\@cfa.harvard.edu";
     open FILE, $afile;
     while (<FILE>) {
       print MAIL $_;
@@ -1804,7 +1815,8 @@ sub send_pline04t_alert {
     close FILE;
 
     #open MAIL, "|mailx -s PLINE04T brad\@head.cfa.harvard.edu";
-    open MAIL, "|mailx -s 'PLINE04T BUOCC TEST' lpulgarinduque\@cfa.harvard.edu";
+    #open MAIL, "|mailx -s 'PLINE04T BUOCC TEST' lpulgarinduque\@cfa.harvard.edu";
+    open MAIL, "|mailx -s 'PLINE04T BUOCC TEST' mtadude\@cfa.harvard.edu";
     open FILE, $afile;
     while (<FILE>) {
       print MAIL $_;
@@ -1830,7 +1842,8 @@ sub send_aacccdpt_yellow_alert {
     close FILE;
 
     #open MAIL, "|mailx -s AACCCDPT brad\@head.cfa.harvard.edu";
-    open MAIL, "|mailx -s 'AACCCDPT BUOCC TEST' lpulgarinduque\@cfa.harvard.edu";
+    #open MAIL, "|mailx -s 'AACCCDPT BUOCC TEST' lpulgarinduque\@cfa.harvard.edu";
+    open MAIL, "|mailx -s 'AACCCDPT BUOCC TEST' mtadude\@cfa.harvard.edu";
     open FILE, $afile;
     while (<FILE>) {
       print MAIL $_;

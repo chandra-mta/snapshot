@@ -1386,7 +1386,8 @@ sub send_sim_unsafe_alert {
     print FILE "This message sent to swolk, malgosia\n"; #debug
     close FILE;
 
-    open MAIL, "|mailx -s SIM_UNSAFE! swolk\@cfa.harvard.edu msobolewska\@cfa.harvard.edu lpulgarinduque\@cfa.harvard.edu";
+    #open MAIL, "|mailx -s SIM_UNSAFE! swolk\@cfa.harvard.edu msobolewska\@cfa.harvard.edu lpulgarinduque\@cfa.harvard.edu";
+    open MAIL, "|mailx -s SIM_UNSAFE! swolk\@cfa.harvard.edu msobolewska\@cfa.harvard.edu mtadude\@cfa.harvard.edu";
     #open MAIL, "|mailx -s SIM_UNSAFE! sot_yellow_alert\@ipa.harvard.edu";
     open FILE, $afile;
     while (<FILE>) {
