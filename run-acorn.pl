@@ -1,4 +1,4 @@
-#!/proj/cm/Release/install.linux64.DS10/ots/bin/perl
+#!/home/ascds/DS.release/ots/bin/perl
 ##!/opt/local/bin/perl -w
 
 # check that my acorn process is running
