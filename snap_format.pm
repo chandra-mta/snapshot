@@ -67,13 +67,13 @@ $s .= sprintf "                       SCS 130  %4s       -Y SA Temp %7.2f   ACIS
 $s .= sprintf "Roll Mom.  %8.3f    SCS 131  %4s %26s Cold Rad %6.1f\n",
     ${$h{AOSYMOM1}}[1], ${$h{COSCS131S}}[1], "", ${$h{"1CRAT"}}[1]; #removed E1300
 
-$s .= sprintf "Pitch Mom. %8.3f    SCS 132  %4s       Ephin temp %7.2f   Warm Rad %6.1f\n",
-    ${$h{AOSYMOM2}}[1], ${$h{COSCS132S}}[1], ${$h{"5EPHINT"}}[1], ${$h{"1WRAT"}}[1]; #removed EPH A-Leak
+$s .= sprintf "Pitch Mom. %8.3f    SCS 132  %4s %26s Warm Rad %6.1f\n",
+    ${$h{AOSYMOM2}}[1], ${$h{COSCS132S}}[1], "", ${$h{"1WRAT"}}[1]; #removed EPH A-Leak
 
-$s .= sprintf "Yaw Mom.   %8.3f    SCS 133  %4s       EIO temp %9.2f   RadMon     %4s\n",
-    ${$h{AOSYMOM3}}[1], ${$h{COSCS133S}}[1], ${$h{"5EIOT"}}[1], ${$h{CORADMEN}}[1];
+$s .= sprintf "Yaw Mom.   %8.3f    SCS 133  %4s %26s RadMon     %4s\n",
+    ${$h{AOSYMOM3}}[1], ${$h{COSCS133S}}[1], "", ${$h{CORADMEN}}[1];
 
-$s .= sprintf "PMTANKP    %8.3f    SCS 107  %4s       EPH temp %9.2f   \n", ${$h{PMTANKP}}[1],${$h{COSCS107S}}[1],${$h{TEPHIN}}[1];
+$s .= sprintf "PMTANKP    %8.3f    SCS 107  %4s\n", ${$h{PMTANKP}}[1], ${$h{COSCS107S}}[1];
 
 #$s .= sprintf "Gyro 2 Curr 1 %6.2f                  ", ${$h{AIRU2G1I}}[1];
 ##$s .= sprintf "\nGyro 1 Curr 1 %6.2f  Roll Bias   %7.4f  EPH 27I %9.2f", ${$h{AIRU1G1I}}[1], ${$h{AOGBIAS1}}[1]*206264.98, ${$h{"5HSE202"}}[1];
@@ -332,10 +332,8 @@ $s .= sprintf "<font color=%s>Cold Rad %6.1f</font>\n",
 $s .= sprintf '<a href="http://cxc.harvard.edu/mta/DAILY/mta_rt/mom_plot.html" STYLE="text-decoration: none" target="blank">';
 $s .= sprintf "<font color=%s>Pitch Mom. %8.3f    </font></a>",
                ${$h{AOSYMOM2}}[3], ${$h{AOSYMOM2}}[1];
-$s .= sprintf "<font color=%s>SCS 132  %4s       </font>",
+$s .= sprintf "<font color=%s>SCS 132  %4s %27s</font>",
                ${$h{COSCS132S}}[3], ${$h{COSCS132S}}[1];
-$s .= sprintf "<font color=%s>Ephin Temp%8.4f   </font>",
-               ${$h{"5EPHINT"}}[3], ${$h{"5EPHINT"}}[1];
 $s .= sprintf "<font color=%s>Warm Rad %6.1f</font>\n",
                ${$h{"1WRAT"}}[3], ${$h{"1WRAT"}}[1];
 #$s .= sprintf "<font color=%s>P4GM%11.1f</font>\n",
@@ -345,10 +343,8 @@ $s .= sprintf "<font color=%s>Warm Rad %6.1f</font>\n",
 $s .= sprintf '<a href="http://cxc.harvard.edu/mta/DAILY/mta_rt/mom_plot.html" STYLE="text-decoration: none" target="blank">';
 $s .= sprintf "<font color=%s>Yaw Mom.   %8.3f    </font></a>",
                ${$h{AOSYMOM3}}[3], ${$h{AOSYMOM3}}[1];
-$s .= sprintf "<font color=%s>SCS 133  %4s       </font>",
+$s .= sprintf "<font color=%s>SCS 133  %4s %27s</font>",
                ${$h{COSCS133S}}[3], ${$h{COSCS133S}}[1];
-$s .= sprintf "<font color=%s>EIO Temp%10.4f   </font>",
-               ${$h{"5EIOT"}}[3], ${$h{"5EIOT"}}[1];
 $s .= sprintf "<font color=%s>RadMon     %4s</font>\n",
                ${$h{CORADMEN}}[3], ${$h{CORADMEN}}[1];
 
@@ -358,10 +354,8 @@ $s .= sprintf "<font color=%s>RadMon     %4s</font>\n",
 
 $s .= sprintf "<font color=%s>PMTANKP     %7.3f    </font></a>",
                ${$h{PMTANKP}}[3], ${$h{PMTANKP}}[1];
-$s .= sprintf "<font color=%s>SCS 107  %4s       </font>",
+$s .= sprintf "<font color=%s>SCS 107  %4s       </font>\n",
                ${$h{COSCS107S}}[3], ${$h{COSCS107S}}[1];
-$s .= sprintf "<font color=%s>EPH temp %9.2f   </font>\n",
-               ${$h{"TEPHIN"}}[3], ${$h{"TEPHIN"}}[1];
 
 #$s .= sprintf "<font color=%s>PMTANKP     %8.3f </font>%23s<font color=%s>EPH temp %9.2f</font>\n",${$h{PMTANKP}}[3],${$h{PMTANKP}}[1]," ",${$h{TEPHIN}}[3], ${$h{TEPHIN}}[1];
 
