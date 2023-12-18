@@ -40,7 +40,7 @@ if (!@a) {
     $host=`hostname`;
     chomp $host;
     system("$acorn_exe -u $UDP_port -C $msids -e $filesize -nv > /dev/null &");
-    open MAIL, "|mailx -s acorn msobolewska\@cfa.harvard.edu swolk\@cfa.harvard.edu";
+    open MAIL, "|mailx -s acorn mtadude\@cfa.harvard.edu";
     print MAIL "$host acorn dead. restarting. \n\n"; # current version
     close MAIL;
     print "Acorn process not found: restarting\n";
