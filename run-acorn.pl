@@ -8,20 +8,12 @@
 # April 2000
 
 $uid = "mta";
-#$work_dir = "/proj/ascwww/AXAF/extra/science/cgi-gen/mta/Snap";
 $work_dir = "/data/mta4/www/Snapshot";
 $pid_file = "$work_dir/racorn.pid";
-#@acorn = qw(/home/ascds/DS.release/bin/acorn /proj/cm/Release/install.DS7.6.9/bin/acorn /data/mta2/pallen/acorn-1.33/acorn /home/swolk/acorn/src1-3/acorn);
 @acorn = qw(/home/ascds/DS.release/bin/acorn);
-#@acorn = qw(/export/acis-flight/primary/acorn-1.33/acorn);
-#@acorn = qw(/home/acisdude/real-time/back-up/acorn-1.33/acorn);
-#@acorn = qw(/home/mta/ACORN/acorn1.52);
 $acorn_exe = (-e $acorn[0])? $acorn[0] : $acorn[1];
-#$UDP_port = "11111"; # eno's acorn feed
 $UDP_port = "11112"; # c3po-v
-#$UDP_port = "11113"; # temp feed from forbin bds 09/11/03
 $msids = "$work_dir/chandra-msids.list";
-#$msids = "$work_dir/msids.list";
 $filesize = 500;
 
 # set environment variables for acorn
@@ -31,8 +23,6 @@ $ENV{ASCDS_CONFIG_MTA_DATA} = (-e $mta_data[0])? $mta_data[0] : $mta_data[1];
 # use custom IPCL dir to get uncalibrated SHLDART, DETART, but
 #  everything else calibrated
 @ipcl = qw(/data/mta4/www/Snapshot/P011 /data/mta4/www/Snapshot/P009);
-##@ipcl = qw(/data/mta4/www/Snapshot/P009 /home/ascds/DS.release/config/tp_template/P011/ /home/ascds/swolk/IPCL/P008 /home/swolk/acorn/ODB);
-#@ipcl = qw(/home/ascds/DS.release/config/tp_template/P011/ /home/ascds/swolk/IPCL/P008 /home/swolk/acorn/ODB);
 $ENV{IPCL_DIR} = (-e $ipcl[0])? $ipcl[0] : $ipcl[1];
 $ENV{LD_LIBRARY_PATH} = '/home/ascds/DS.release/lib:/home/ascds/DS.release/ots/lib:/soft/SYBASE_OSRV16.0/OCS-16_0/lib:/home/ascds/DS.release/otslib:/opt/X11R6/lib:/usr/lib64/alliance/lib:$LD_LIBRARY_PATH';
 chdir $work_dir or die "Cannot cd to $work_dir\n";
@@ -45,13 +35,11 @@ while (<PIDF>) { @pinfo = split };
 # get the PID for the currently running acorn process (if any)
 
 @p = `/bin/ps -auxwww | grep $uid`;
-#@a = grep /$acorn_exe.+$work_dir/, @p;
 @a = grep /$acorn_exe.+$msids/, @p;
 if (!@a) {
     $host=`hostname`;
     chomp $host;
     system("$acorn_exe -u $UDP_port -C $msids -e $filesize -nv > /dev/null &");
-    #open MAIL, "|mailx -s acorn tisobe\@cfa.harvard.edu swolk\@cfa.harvard.edu msobolewska\@cfa.harvard.edu";
     open MAIL, "|mailx -s acorn msobolewska\@cfa.harvard.edu swolk\@cfa.harvard.edu";
     print MAIL "$host acorn dead. restarting. \n\n"; # current version
     close MAIL;
