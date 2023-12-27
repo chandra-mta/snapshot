@@ -1,5 +1,13 @@
 # this module writes out the chandra snapshot
 
+use JSON;
+
+sub write_json {
+    my %h = @_;
+    my $json = encode_json \%h;
+    return $json
+}
+
 sub write_txt {
   my %h = @_;
 
