@@ -4,7 +4,30 @@ use JSON;
 
 sub write_json {
     my %h = @_;
-    my $json = encode_json \%h;
+
+    my %status_assignments = (B => 'unchecked',
+                              G => 'nominal',
+                              Y => 'caution',
+                              R => 'warning',
+                              S => 'stale15min',
+                              I => 'invalid');
+
+    my %new_hash;
+
+    for my $msid (keys %h) {
+        my $status = 'unchecked';
+        for my $stat (keys %status_assignments) {
+            if ($h{$msid}[2] eq $stat) {
+                $status = $status_assignments{$stat};
+            }
+        }
+
+        $new_hash{$msid} = {'time' => $h{$msid}[0],
+                           'value' => $h{$msid}[1],
+                           'status' => $status};
+    }
+
+    my $json = encode_json \%new_hash;
     return $json
 }
 
