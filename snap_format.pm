@@ -42,7 +42,7 @@ $s .= sprintf "                       FSS Alfa  %6.2f    Batt 1 SOC %7.2f%%\n",
     ${$h{AOALPANG}}[1],${$h{SOCB1}}[1];
 
 $s .= sprintf "Avg HRMA Temp%6.2f    FSS Beta  %6.2f    Batt 2 SOC %7.2f%%   A -15 V %6.2f\n",
-    ${$h{"4OAVHRMT"}}[1],${$h{AOBETANG}}[1],${$h{SOCB2}}[1], ${$h{"2N15VAVL"}}[1];
+    ${$h{"4OAVHRMT_WIDE"}}[1],${$h{AOBETANG}}[1],${$h{SOCB2}}[1], ${$h{"2N15VAVL"}}[1];
 
 $s .= sprintf "Avg OBA Temp %6.2f    SA Resolv %6.2f    Batt 3 SOC %7.2f%%   A +15 V %6.2f\n",
     ${$h{"4OAVOBAT"}}[1],${$h{AOSARES1}}[1], ${$h{SOCB3}}[1], ${$h{"2P15VAVL"}}[1];
@@ -260,7 +260,7 @@ $s .= sprintf "<font color=%s>Batt 1 SOC %7.2f%%</font>\n",
                ${$h{SOCB1}}[3], ${$h{SOCB1}}[1];
 
 $s .= sprintf "<font color=%s>Avg HRMA Temp%6.2f    </font>",
-               ${$h{"4OAVHRMT"}}[3], ${$h{"4OAVHRMT"}}[1];
+               ${$h{"4OAVHRMT_WIDE"}}[3], ${$h{"4OAVHRMT_WIDE"}}[1];
 $s .= sprintf "<font color=%s>FSS Beta  %6.2f    </font>",
                ${$h{AOBETANG}}[3], ${$h{AOBETANG}}[1];
 $s .= sprintf "<font color=%s>Batt 2 SOC %7.2f%%   </font>",
@@ -542,7 +542,7 @@ printf S "Bus I %6.2f<br/>\n", ${$h{ELBI_LOW}}[1];
 printf S "Bat1SOC %7.2f%%<br/>\n", ${$h{SOCB1}}[1];
 printf S "Bat2SOC %7.2f%%<br/>\n", ${$h{SOCB2}}[1];
 printf S "Bat3SOC %7.2f%%<br/>\n", ${$h{SOCB3}}[1];
-printf S "Avg HRMA T %6.2f<br/>\n", ${$h{"4OAVHRMT"}}[1];
+printf S "Avg HRMA T %6.2f<br/>\n", ${$h{"4OAVHRMT_WIDE"}}[1];
 printf S "Avg OBA T %6.2f<br/>\n", ${$h{"4OAVOBAT"}}[1];
 printf S "OBA Tavg %s<br/>\n", ${$h{"4OBAVTMF"}}[1];
 printf S "OBA Trng %s<br/>\n", ${$h{"4OBTOORF"}}[1];
@@ -708,7 +708,7 @@ printf S "Bus I %6.2f \*%1s\n", ${$h{ELBI_LOW}}[1], ${$h{ELBI_LOW}}[2];
 printf S "Bat1SOC %7.2f%% \*%1s\n", ${$h{SOCB1}}[1], ${$h{SOCB1}}[2];
 printf S "Bat2SOC %7.2f%% \*%1s\n", ${$h{SOCB2}}[1], ${$h{SOCB2}}[2];
 printf S "Bat3SOC %7.2f%% \*%1s\n", ${$h{SOCB3}}[1], ${$h{SOCB3}}[2];
-printf S "Avg HRMA T %6.2f \*%1s\n", ${$h{"4OAVHRMT"}}[1], ${$h{"4OAVHRMT"}}[2];
+printf S "Avg HRMA T %6.2f \*%1s\n", ${$h{"4OAVHRMT_WIDE"}}[1], ${$h{"4OAVHRMT_WIDE"}}[2];
 printf S "Avg OBA T %6.2f \*%1s\n", ${$h{"4OAVOBAT"}}[1], ${$h{"4OAVOBAT"}}[2];
 printf S "OBA Tavg %s \*%1s\n", ${$h{"4OBAVTMF"}}[1], ${$h{"4OBAVTMF"}}[2];
 printf S "OBA Trng %s \*%1s\n", ${$h{"4OBTOORF"}}[1], ${$h{"4OBTOORF"}}[2];
