@@ -35,6 +35,7 @@ $ENV{ASCDS_CONFIG_MTA_DATA} = (-e $mta_data[0])? $mta_data[0] : $mta_data[1];
 #@ipcl = qw(/home/ascds/DS.release/config/tp_template/P011/ /home/ascds/swolk/IPCL/P008 /home/swolk/acorn/ODB);
 $ENV{IPCL_DIR} = (-e $ipcl[0])? $ipcl[0] : $ipcl[1];
 $ENV{LD_LIBRARY_PATH} = '/home/ascds/DS.release/lib:/home/ascds/DS.release/ots/lib:/soft/SYBASE_OSRV16.0/OCS-16_0/lib:/home/ascds/DS.release/otslib:/opt/X11R6/lib:/usr/lib64/alliance/lib:$LD_LIBRARY_PATH';
+$ENV{TLM_TEMPLATE_SET_DIR} = '/home/ascds/DS.release/config/tp_template';
 chdir $work_dir or die "Cannot cd to $work_dir\n";
 
 # get the PID for the last known acorn process
