@@ -149,8 +149,13 @@ sub do_comps {
   # https://cxc.harvard.edu/contrib/juda/memos/FN443_HRC_in_RADMON.pdf
   # https://cxc.harvard.edu/contrib/juda/memos/radmon/mcp_total_rate_threshold.html
   # https://github.com/chandra-mta/mtanb/blob/g16-hrc-proxy/g16-hrc-proxy/norm_2detart_2shldart.ipynb
-  ${$h{"2SHLDBRT"}}[1] = int(${$h{"2SHLDBRT"}}[1] / 256);
-  ${$h{"2DETBRT"}}[1] = floor(log(${$h{"2DETBRT"}}[1] + 1) / log(2));
+
+  #With the transition from the custom MTA IPCL with uncalibrated SHLDART, DETART to live ASCDS IPCL P016 with calibration
+  #this transformation back to high-order bytes is now handled in the acorn telemetry processing
+  #Therefore this scaling is already performed
+  
+  #${$h{"2SHLDBRT"}}[1] = int(${$h{"2SHLDBRT"}}[1] / 256);
+  #${$h{"2DETBRT"}}[1] = floor(log(${$h{"2DETBRT"}}[1] + 1) / log(2));
 
   $utc = `date -u +"%Y:%j:%T (%b%e)"`;
   chomp $utc;
