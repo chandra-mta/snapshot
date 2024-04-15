@@ -20,7 +20,7 @@ $filesize = 500;
 
 @mta_data = qw(/home/ascds/DS.release/config/mta/data /data/mta2/pallen/acorn-1.3/groups /home/swolk/acorn/groups);
 $ENV{ASCDS_CONFIG_MTA_DATA} = (-e $mta_data[0])? $mta_data[0] : $mta_data[1]; 
-@ipcl = qw(/home/ascds/DS.release/config/tp_template/P016 /data/mta4/www/Snapshot/P011)
+@ipcl = qw(/home/ascds/DS.release/config/tp_template/P016 /data/mta4/www/Snapshot/P011);
 # use custom IPCL dir to get uncalibrated SHLDART, DETART, but
 #  everything else calibrated
 #@ipcl = qw(/data/mta4/www/Snapshot/P011 /data/mta4/www/Snapshot/P009);
