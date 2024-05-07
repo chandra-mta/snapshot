@@ -258,7 +258,7 @@ close SF;
 
 unlink $lock;
 
-`/opt/local/bin/idl plot > /dev/null`;  # make plots
+#`/opt/local/bin/idl plot > /dev/null`;  # make plots
 #end
 #replace cronjob sleep 60;
 #replace cronjob }
