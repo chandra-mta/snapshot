@@ -24,6 +24,7 @@ $web_dir = "/data/mta4/www/Snapshot";
 #$web_dir = "/proj/ascwww/AXAF/extra/science/cgi-gen/mta/Snap";
 $wap_dir = "/data/mta4/www/WL/Snap_dat";
 $text_ver = "./chandra.snapshot";
+$JSON_OUT = "./chandra.snapshot.json";
 $pool_ver = "/pool14/chandra/chandra_psi.snapshot";
 $check_comm_file = "/home/mta/Snap/check_comm_fail"; # file to write if 
                                         # check comm fails and alert is sent
@@ -163,6 +164,7 @@ use check_state;
 
 use snap_format;
 my $snap_text = write_txt(%h);
+my $snap_json = write_json(%h);
 my $snap_html = write_htm(%h);
 #my $snap_wap = write_wap(%h);
 my $snap_curr_wap = write_curr_wap(%h);
@@ -201,6 +203,11 @@ open(SF,">$snapf") or die "Cannot create $snapf\n";
 print SF $snap_text;
 close SF;
 `cp $text_ver $pool_ver`;
+
+open(SF, ">$JSON_OUT")
+    or die "Couldn't open $JSON_OUT for writing\n";
+print SF $snap_json;
+close(SF);
 
 #$snapf = "$work_dir/chandra.snapshot";
 #open(SF,">$snapf") or die "Cannot create $snapf\n";
