@@ -1281,7 +1281,7 @@ sub send_107_alert {
     print FILE "http://cfa.cxc.harvard.edu/mta/Snapshot/BUOCC/snap.cgi\n"; #debug
     #print FILE "http://cfa.cxc.harvard.edu/mta_days/MIRROR/Snapshot/BUOCC/snap.cgi\n"; #debug
     #print FILE "This message sent to brad\n"; #debug
-    print FILE "This message sent to malgosia\n"; #debug
+    print FILE "This message sent to mtadude\n"; #debug
     printf FILE "BUOCC BUOCC BUOCC TEST\n\n";
     #print FILE "This message sent to brad rac swolk\n"; #debug
     #print FILE "This message sent to brad\n"; #debug
@@ -1347,7 +1347,7 @@ sub send_nsun_alert {
     print FILE "\nSnapshot:\n";
     print FILE "http://cfa.cxc.harvard.edu/mta/Snapshot/BUOCC/snap.cgi\n"; #debug
     #print FILE "This message sent to brad\n"; #debug
-    print FILE "This message sent to malgosia\n"; #debug
+    print FILE "This message sent to mtadude\n"; #debug
     printf FILE "BUOCC BUOCC BUOCC TEST\n\n";
     #print FILE "This message sent to brad swolk\n"; #debug
     #print FILE "\n TEST   TEST   TEST   TEST   TEST   TEST   TEST\n"; #debug
@@ -1383,7 +1383,7 @@ sub send_sim_unsafe_alert {
       
     print FILE "\nSnapshot:\n";
     print FILE "http://cfa.cxc.harvard.edu/mta/Snapshot/BUOCC/snap.cgi\n"; #debug
-    print FILE "This message sent to malgosia\n"; #debug
+    print FILE "This message sent to mtadude\n"; #debug
     close FILE;
 
     #open MAIL, "|mailx -s 'UNSAFE! BUOCC ' lpulgarinduque\@cfa.harvard.edu";
@@ -1412,7 +1412,7 @@ sub send_hrc_shld_alert {
       
     print FILE "\nSnapshot:\n";
     print FILE "http://cfa.cxc.harvard.edu/mta/Snapshot/BUOCC/snap.cgi\n"; #debug
-    print FILE "This message sent to malgosia\n"; #debug
+    print FILE "This message sent to mtadude\n"; #debug
     close FILE;
 
     #open MAIL, "|mailx -s 'HRC SHIELD' brad\@head.cfa.harvard.edu";
@@ -1476,7 +1476,7 @@ sub send_brit_alert {
     print FILE "\nSnapshot:\n";
     print FILE "http://cfa.cxc.harvard.edu/mta/Snapshot/BUOCC/snap.cgi\n"; #debug
     #print FILE "http://cfa.cxc.harvard.edu/mta_days/MIRROR/Snapshot/BUOCC/snap.cgi\n"; #debug
-    print FILE "This message sent to malgosia\n"; #debug
+    print FILE "This message sent to mtadude\n"; #debug
     printf FILE "BUOCC BUOCC BUOCC TEST\n\n";
     #print FILE "This message sent to brad\n"; #debug
     #print FILE "This message sent to brad rac swolk\n"; #debug
@@ -1545,7 +1545,7 @@ sub send_cpe_alert {
     print FILE "\nSnapshot:\n";
     print FILE "http://cfa.cxc.harvard.edu/mta/Snapshot/BUOCC/snap.cgi\n"; #debug
     #print FILE "http://cfa.cxc.harvard.edu/mta_days/MIRROR/Snapshot/BUOCC/snap.cgi\n"; #debug
-    print FILE "This message sent to malgosia\n"; #debug
+    print FILE "This message sent to mtadude\n"; #debug
     printf FILE "BUOCC BUOCC BUOCC TEST\n\n";
     #print FILE "This message sent to brad\n"; #debug
     close FILE;
@@ -1608,7 +1608,7 @@ sub send_fmt_alert {
       
     print FILE "\nSnapshot:\n";
     print FILE "http://cfa.cxc.harvard.edu/mta/Snapshot/BUOCC/snap.cgi\n"; #debug
-    print FILE "This message sent to malgosia\n"; #debug
+    print FILE "This message sent to mtadude\n"; #debug
     printf FILE "BUOCC BUOCC BUOCC TEST\n\n";
     #print FILE "\n TEST   TEST   TEST   TEST   TEST   TEST   TEST\n"; #debug
     close FILE;
@@ -1673,7 +1673,7 @@ sub send_gyro_alert {
     print FILE "http://cfa.cxc.harvard.edu/mta/Snapshot/BUOCC/snap.cgi\n"; #debug
     #print FILE "This message sent to brad\n"; #debug
     #print FILE "This message sent to swolk brad brad1\n"; #debug
-    print FILE "This message sent to malgosia\n"; #debug
+    print FILE "This message sent to mtadude\n"; #debug
     printf FILE "BUOCC BUOCC BUOCC TEST\n\n";
     #print FILE "\n TEST   TEST   TEST   TEST   TEST   TEST   TEST\n"; #debug
     close FILE;
@@ -1703,7 +1703,7 @@ sub send_ctxpwr_alert {
     printf FILE "BUOCC BUOCC BUOCC TEST\n\n";
     print FILE "Chandra realtime telemetry shows Transmitter $_[1] Power = $_[0] DBM at $obt UT\n";
     print FILE "Limit = 36.75 DBM\n\n";
-    print FILE "This message sent to malgosia\n"; #debug
+    print FILE "This message sent to mtadude\n"; #debug
     close FILE;
 
     #open MAIL, "|mailx -s CTXPWR brad\@head.cfa.harvard.edu swolk\@head.cfa.harvard.edu";
@@ -1729,7 +1729,7 @@ sub send_ctxv_alert {
     open FILE, ">$afile";
     print FILE "Chandra realtime telemetry shows Transmitter $_[1] Voltage = $_[0] V at $obt UT\n";
     print FILE "Limit = 3.60 V\n\n";
-    print FILE "This message sent to malgosia\n"; #debug
+    print FILE "This message sent to mtadude\n"; #debug
     printf FILE "BUOCC BUOCC BUOCC TEST\n\n";
     close FILE;
 
@@ -1784,7 +1784,7 @@ sub send_pline03t_alert {
     printf FILE "BUOCC BUOCC BUOCC TEST\n\n";
     print FILE "Chandra realtime telemetry shows  PLINE03T = $_[0] F at $obt UT\n";
     print FILE "Limit > 42.5 V\n\n";
-    print FILE "This message sent to malgosia\n"; #debug
+    print FILE "This message sent to mtadude\n"; #debug
     close FILE;
 
     #open MAIL, "|mailx -s PLINE03T brad\@head.cfa.harvard.edu";
@@ -1811,7 +1811,7 @@ sub send_pline04t_alert {
     printf FILE "BUOCC BUOCC BUOCC TEST\n\n";
     print FILE "Chandra realtime telemetry shows  PLINE04T = $_[0] F at $obt UT\n";
     print FILE "Limit > 42.5 V\n\n";
-    print FILE "This message sent to malgosia\n"; #debug
+    print FILE "This message sent to mtadude\n"; #debug
     close FILE;
 
     #open MAIL, "|mailx -s PLINE04T brad\@head.cfa.harvard.edu";
@@ -1838,7 +1838,7 @@ sub send_aacccdpt_yellow_alert {
     printf FILE "BUOCC BUOCC BUOCC TEST\n\n";
     print FILE "Chandra realtime telemetry shows  AACCCDPT = $_[0] C at $obt UT\n";
     print FILE "Limit > -21.5 C and < -18.3 C\n\n";
-    print FILE "This message sent to malgosia\n"; #debug
+    print FILE "This message sent to mtadude\n"; #debug
     close FILE;
 
     #open MAIL, "|mailx -s AACCCDPT brad\@head.cfa.harvard.edu";
