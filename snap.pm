@@ -165,7 +165,7 @@ sub get_curr {
 
   # read the CRM fluence - replaces F_ACE in snapshot May 2001
   #####$fluf = "/proj/rac/ops/CRM3/CRMsummary.dat";
-  $fluf = "/data/mta4/proj/rac/ops/CRM3/CRMsummary.dat";        #--- ti 10/06/15
+  $fluf = "/data/mta4/www/RADIATION/CRM3/CRMsummary.dat"; # Updates to pathing to latest supported file instance 09/16/25 WA
   if (open FF, $fluf) {
       @ff = <FF>;
       @fl = split ' ',$ff[-1];

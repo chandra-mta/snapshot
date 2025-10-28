@@ -31,7 +31,7 @@ $check_comm_file_bu="/home/mta/Snap/check_comm_fail_bu";
 $check_comm_sent="/home/mta/Snap/check_comm_sent";
 
 #`cp /proj/rac/ops/CRM3/CRMsummary.dat $web_dir`;   # copy so DMZ can see it 11/16/10 bds
-`cp /proj/rac/ops/CRM3/CRMsummary.dat $web_dir`;   # copy so DMZ can see it 11/16/10 bds
+`cp /data/mta4/www/RADIATION/CRM3/CRMsummary.dat $web_dir`;   # copy from web to current web directory. DMZ visible 09/16/25 WA
 
 my @ftype = qw(ACA CCDM EPHIN EPS PCAD IRU SIM-OTG SI TEL EPS-SFMT NORM-SFMT);
 
