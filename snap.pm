@@ -140,7 +140,8 @@ sub get_curr {
   
   #$fluf = "/proj/rac/ops/ACE/fluace.dat";
   #$fluf = "/data/mta4/space_weather/ACE/fluace.dat";
-  $fluf = "/data/mta4/proj/rac/ops/ACE/fluace.dat";     #--- ti 10/06/15
+  # $fluf = "/data/mta4/proj/rac/ops/ACE/fluace.dat";     #--- WA Deprecated 04/20/2026
+  $fluf = "/data/mta4/Space_Weather/ACE/Data/fluace.dat";
   if (open FF, $fluf) {
       @ff = <FF>;
       @fl = split ' ',$ff[-3];
@@ -179,7 +180,8 @@ sub get_curr {
   # read the ACE Kp file
   
   #$kpf = "/proj/rac/ops/ACE/kp.dat";
-  $kpf = "/data/mta4/proj/rac/ops/ACE/kp.dat";  #--- ti 10/06/15
+  #$kpf = "/data/mta4/proj/rac/ops/ACE/kp.dat";  #--- WA Deprecated 04/20/2026
+  $kpf = "/data/mta4/Space_Weather/KP/Data/kp.dat";
   if (open KPF, $kpf) {
       while (<KPF>) { $kp = $_ };
   } else { print STDERR "Cannot read $kpf\n" };
