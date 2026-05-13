@@ -1910,7 +1910,7 @@ sub time_curr {
   use Time::TST_Local;
   # return 1 if $time is within $tlim seconds of current time
   #  else return 0
-  $tlim = 120;
+  $tlim = 600;
   $time = $_[0];
   my $t1998 = 883612800.0;
   @now = gmtime();
